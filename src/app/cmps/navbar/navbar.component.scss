@@ -1,0 +1,57 @@
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 2px solid #90bbca76;
+    box-shadow: 2px 0 5px 4px #90BBCA30;
+    width: 100%;
+    padding: 0;
+    padding-left: 1em;
+    height: 3.6rem;
+    .left {
+        display: flex;
+        .logo {
+            height: 3rem;
+            cursor: pointer;
+        }
+        .name {
+            margin-left: 1em;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            #granja {
+                font-weight: 700;
+                font-size: 1.4em;
+                line-height: 1em;
+            }
+            #papa {
+                font-weight: 300;
+                font-size: 0.8em;
+                line-height: 1em;
+            }
+        }
+    }
+    .right {
+        display: flex;
+        align-items: center;
+        margin-right: 1em;
+        .userButton {
+            border: none;
+            outline: none;
+            background-color: transparent;
+            border-radius: 50%;
+            width: 2rem;
+            height: 2rem;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-left: 0.4em;
+            i {
+                font-size: 1.5rem;
+            }
+            &:hover {
+                background-color: #f0f0f0;
+            }
+        }
+    }
+}

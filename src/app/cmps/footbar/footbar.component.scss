@@ -1,0 +1,13 @@
+.footbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    padding: 0 1em;
+    box-shadow: 0 -2px 5px 2px #FAFAFA;
+    span {
+        font-size: 0.8em;
+    }
+}
