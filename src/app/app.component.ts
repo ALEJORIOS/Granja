@@ -15,7 +15,7 @@ export class AppComponent {
     router.events
     .pipe(filter(event => event instanceof NavigationEnd))
     .subscribe((event: any) => {
-      this.currentRoute = event.url;
+      this.currentRoute = event.urlAfterRedirects;
       this.showBars = !this.barsExceptions.includes(this.currentRoute)
     })
   }

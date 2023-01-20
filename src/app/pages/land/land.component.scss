@@ -1,0 +1,49 @@
+.home {
+    display: grid;
+    grid-auto-rows: 12rem;
+    grid-template-columns: repeat(auto-fit, minmax(20rem, 22rem));
+    padding: 2rem;
+    justify-content: center;
+
+    .cardOption {
+        border-radius: 1em;
+        width: 20rem;
+        height: 10rem;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        cursor: pointer;
+        box-shadow: 5px 5px 10px 1px #B0B0B0;
+        font-size: 1rem;
+
+    }
+    .recordAttendance {
+        background-color: #d90429;
+        color: white;
+        font-weight: 600;
+        font-size: 1.5rem;
+        border: 3px solid #a2001b;
+    }
+    .rateStudents {
+        background-color: #0077b6;
+        color: white;
+        font-weight: 600;
+        font-size: 1.5rem;
+        border: 3px solid #005888;
+    }
+    .seeStudents {
+        background-color: #ffbe0b;
+        color: white;
+        font-weight: 600;
+        font-size: 1.5rem;
+        border: 3px solid #cd9600;
+    }
+    .news {
+        background-color: #7209b7;
+        color: white;
+        font-weight: 600;
+        font-size: 1.5rem;
+        border: 3px solid #58068f;
+    }
+}
+
