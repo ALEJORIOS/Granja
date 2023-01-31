@@ -1,0 +1,87 @@
+.form {
+    display: flex;
+    gap: 1em;
+    flex-wrap: wrap;
+    label {
+        display: flex;
+        flex-direction: column;
+        span {
+            font-weight: 600;
+        }
+    }
+    .opt {
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+        padding-top: 1em;
+        label {
+            display: flex;
+            flex-direction: row-reverse;
+            justify-content: flex-end;
+        }
+    }
+    .classes {
+        display: flex;
+        flex-direction: column;
+        label {
+            display: flex;
+            flex-direction: row-reverse;
+            justify-content: flex-end;
+        }
+    }
+}
+input[type=text] {
+    min-width: 20em;
+    height: 3rem;
+    padding-left: 0.8em;
+    outline: none;
+    border-radius: 4px;
+    border: 1px solid #3a86ff;
+    &:focus {
+        border: 2px solid #3a86ff;
+        background-color: #3a86ff10;
+    }
+}
+
+input[type=date] {
+    min-width: 10em;
+    height: 3rem;
+    padding-left: 0.5em;
+    outline: none;
+    border-radius: 4px;
+    border: 1px solid #3a86ff;
+    &:focus {
+        border: 2px solid #3a86ff;
+        background-color: #3a86ff10;
+    }
+}
+
+.modalButton {
+    border: none;
+    border-radius: 4px;
+    padding: 4px 8px;
+    font-size: 1.2rem;
+    user-select: none;
+}
+
+.red {
+    background-color: #d90429;
+    color: white;
+    &:active:not(:disabled) {
+        box-shadow: 0 0 0px 4px #d904293a;
+    }
+    &:disabled {
+        background-color: #d90429aa;
+    }
+}
+
+.blue {
+    background-color: #3a86ff;
+    color: white;
+    &:active:not(:disabled) {
+        box-shadow: 0 0 0px 4px #3a86ff3a;
+    }
+    &:disabled {
+        background-color: #3a86ffaa;
+    }
+}

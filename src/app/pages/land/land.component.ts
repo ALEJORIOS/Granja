@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   standalone: true,
@@ -8,4 +9,9 @@ import { Component } from '@angular/core';
 })
 export default class LandComponent {
 
+  constructor(private router: Router) {}
+
+  navigateTo(route: string) {
+    this.router.navigate([route]);
+  }
 }

@@ -6,44 +6,50 @@
     justify-content: center;
 
     .cardOption {
-        border-radius: 1em;
+        border-radius: 15px;
         width: 20rem;
         height: 10rem;
         display: flex;
         justify-content: center;
         align-items: center;
         cursor: pointer;
-        box-shadow: 5px 5px 10px 1px #B0B0B0;
+        user-select: none;
+        // box-shadow: rgba(136, 165, 191, 0.48) 6px 2px 16px 0px, rgba(255, 255, 255, 0.8) -6px -2px 16px 0px;
         font-size: 1rem;
+        transition: 0.2s transform ease;
+        &:hover {
+            transform: scale(1.08);
+            transition: 0.2s transform ease;
+        }
 
     }
     .recordAttendance {
         background-color: #d90429;
+        box-shadow: #d9042950 6px 2px 16px 0px, #ffffffdd -6px -2px 16px 0px;
         color: white;
         font-weight: 600;
         font-size: 1.5rem;
-        border: 3px solid #a2001b;
     }
     .rateStudents {
         background-color: #0077b6;
+        box-shadow: #0077b650 6px 2px 16px 0px, #ffffffdd -6px -2px 16px 0px;
         color: white;
         font-weight: 600;
         font-size: 1.5rem;
-        border: 3px solid #005888;
     }
     .seeStudents {
         background-color: #ffbe0b;
+        box-shadow: #ffbe0b50 6px 2px 16px 0px, #ffffffdd -6px -2px 16px 0px;
         color: white;
         font-weight: 600;
         font-size: 1.5rem;
-        border: 3px solid #cd9600;
     }
     .news {
         background-color: #7209b7;
+        box-shadow: #7209b750 6px 2px 16px 0px, #ffffffdd -6px -2px 16px 0px;
         color: white;
         font-weight: 600;
         font-size: 1.5rem;
-        border: 3px solid #58068f;
     }
 }
 

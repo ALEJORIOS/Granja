@@ -1,9 +1,71 @@
 .students {
     display: flex;
+    flex-direction: column;
     justify-content: center;
+    align-items: center;
     width: 100vw;
     padding: 1rem 3rem;
+
+    .addStudent {
+        border: none;
+        border-radius: 4px;
+        padding: 0.4em 0.6em;
+        margin-bottom: 1em;
+        color: white;
+        background-color: #3a86ff;
+    }
     table {
         width: 100%;
+
+        @mixin groupN($bgcolor) {
+            background-color: $bgcolor;
+            color: white;
+            font-weight: 600;
+            td {
+                padding-left: 4px;
+            }
+        }
+
+        @mixin students($bgcolor) {
+            background-color: $bgcolor;
+            td {
+                padding-left: 6px;
+                cursor: pointer;
+            }
+        }
+
+        .group1 {
+            @include groupN(#d90429);
+            position: sticky;
+            top: 0
+        }
+        .group2 {
+            @include groupN(#0077b6);
+            position: sticky;
+            top: 0
+        }
+        .group3 {
+            @include groupN(#ffbe0b);
+            position: sticky;
+            top: 0
+        }
+        .group4 {
+            @include groupN(#7209b7);
+            position: sticky;
+            top: 0
+        }
+
+        .sg1 {
+            @include students(#d904290a);
+        }
+        .sg2 {
+            @include students(#0077b60a);
+        }
+        .sg3 {
+            @include students(#ffbe0b0a);
+        }
+        .sg4 {
+            @include students(#7209b70a);
+        }
     }
 }

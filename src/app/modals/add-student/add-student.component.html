@@ -1,0 +1,31 @@
+<div class="modal-header">
+    <h2 *ngIf="!edit">Añadir Estudiante</h2>
+    <h2 *ngIf="edit">Editar Estudiante</h2>
+    <button type='button' class='btn-close' aria-label='Close' (click)="close()"></button>
+</div>
+<div class="modal-body">
+    <div class="form" [formGroup]="formData">
+        <label><span>Nombre </span><input type="text" formControlName="name"></label>
+        <label><span>Apellido </span><input type="text" formControlName="lastName"></label>
+        <label><span>Responsable </span><input type="text" formControlName="parent"></label>
+        <label><span>Contacto </span><input type="text" formControlName="contact"></label>
+        <div class="opt">
+            <label><span>&nbsp;Fecha de Cumpleaños</span><input type="radio" name="opt" [value]="true" [(ngModel)]="birthday" [ngModelOptions]="{standalone: true}"></label>
+            <label><span>&nbsp;Grupo Infantil</span><input type="radio" name="opt" [value]="false" [(ngModel)]="birthday" [ngModelOptions]="{standalone: true}"></label>
+        </div>
+        <label *ngIf="birthday"><span>Fecha de Nacimiento </span><input type="date" formControlName="birthday"></label>
+        <label *ngIf="!birthday"><span>Grupo</span>
+            <div class="classes">
+                <label>&nbsp;Pequeño Redil<input type="radio" name="class"></label>
+                <label>&nbsp;Simiente Preciosa<input type="radio" name="class"></label>
+                <label>&nbsp;Sembradores<input type="radio" name="class"></label>
+                <label>&nbsp;Cosechadores<input type="radio" name="class"></label>
+            </div>
+        </label>
+    </div>
+</div>
+<div class="modal-footer">
+    <button *ngIf="!edit" class="modalButton blue" (click)="add()">Añadir</button>
+    <button *ngIf="edit" class="modalButton blue">Editar</button>
+    <button class="modalButton red" (click)="close()" disabled>Cancelar</button>
+</div>
