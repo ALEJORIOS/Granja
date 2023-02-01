@@ -1,0 +1,23 @@
+@mixin alert($bgcolor) {
+    width: 100%;
+    color: white;
+    font-weight: 500;
+    background-color: $bgcolor;
+    box-sizing: border-box;
+    padding: 0.4em;
+    border-radius: 4px 6px;
+    margin-bottom: 0.2em;
+}
+
+.error {
+    @include alert(#D90429)
+}
+.warning {
+    @include alert(#FFBE0B)
+}
+.info {
+    @include alert(#0077B6)
+}
+.success {
+    @include alert(#008000)
+}

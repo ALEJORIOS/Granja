@@ -18,4 +18,16 @@ export class AppService {
   getGroupAges() {
     return this.httpClient.get<any>(`${url}/group-ages`);
   }
+
+  createStudent(body: any) {
+    return this.httpClient.post<any>(`${url}/add`, body);
+  }
+
+  editStudent(body: any) {
+    return this.httpClient.put<any>(`${url}/edit`, body);
+  }
+
+  deleteRecord(id: string) {
+    return this.httpClient.delete<any>(`${url}/delete`, {params: {id: id}});
+  }
 }

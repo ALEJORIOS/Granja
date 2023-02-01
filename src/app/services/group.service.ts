@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import * as dayjs from 'dayjs';
+import { BehaviorSubject } from 'rxjs';
 import { AppService } from './app.service';
 
 @Injectable({
@@ -8,6 +9,8 @@ import { AppService } from './app.service';
 export class GroupService {
 
   groupAges: any = {};
+  maxYear: number = 11;
+  agesLoad = new BehaviorSubject(false);
 
   constructor(private appService: AppService) { }
 
@@ -15,17 +18,33 @@ export class GroupService {
     this.appService.getGroupAges().subscribe({
       next: (res) => {
         this.groupAges = res[0].value;
-        console.log('>>>', this.groupAges);
+        this.agesLoad.next(true);
       },
       error: (err) => {
         console.error(err);
+        this.agesLoad.next(false);
       }
     })
   }
 
-  assignGroup(birthday: string) {
-    this.getAges();
-    const age = Math.floor(dayjs(dayjs()).diff(birthday, 'year', true));
+  assignGroup(birthday: string): string {
     
+    const age = Math.floor(dayjs(dayjs()).diff(birthday, 'year', true));
+    if(age >= this.maxYear) {
+      return "older";
+    }else{
+      if(this.groupAges.g1.includes(age)){
+        return "1";
+      }
+      else if(this.groupAges.g2.includes(age)){
+        return "2";
+      }
+      else if(this.groupAges.g3.includes(age)){
+        return "3";
+      }
+      else {
+        return "4";
+      }
+    }
   }
 }

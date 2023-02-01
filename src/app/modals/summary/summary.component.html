@@ -1,0 +1,36 @@
+<div class="modal-header">
+    <h3>Resumen</h3>
+    <button type='button' class='btn-close' aria-label='Close' (click)="close()"></button>
+</div>
+<div class="modal-body">
+    <table>
+        <tr>
+            <td><span>Pequeño Redil:</span></td>
+            <td style="padding-left: 1.2em;"><strong>{{ summary.pequenoRedil }}</strong></td>
+        </tr>
+        <tr>
+            <td><span>Simiente Preciosa: </span></td>
+            <td style="padding-left: 1.2em;"><strong>{{ summary.simientoPreciosa }}</strong></td>
+        </tr>
+        <tr>
+            <td><span>Sembradores: </span></td>
+            <td style="padding-left: 1.2em;"><strong>{{ summary.sembradores }}</strong></td>
+        </tr>
+        <tr>
+            <td><span>Cosechadores: </span></td>
+            <td style="padding-left: 1.2em;"><strong>{{ summary.cosechadores }}</strong></td>
+        </tr>
+        <tr>
+            <td><span>Granjeritas: </span></td>
+            <td style="padding-left: 1.2em;"><strong>{{ summary.women }}</strong></td>
+        </tr>
+        <tr>
+            <td><span>Granjeritos: </span></td>
+            <td style="padding-left: 1.2em;"><strong>{{ summary.men }}</strong></td>
+        </tr>
+        <tr>
+            <td><span>Total Granjeritos: </span></td>
+            <td style="padding-left: 1.2em;"><strong>{{ summary.total }}</strong></td>
+        </tr>
+    </table>
+</div>

@@ -30,6 +30,29 @@
                 line-height: 1em;
             }
         }
+        .home {
+            margin-left: 1em;
+            border-radius: 4px;
+            border: none;
+            background-color: #3A86FF;
+            color: white;
+            font-weight: 600;
+            font-size: 1.2rem;
+            box-shadow: 0 0 5px 2px #e0e0e0;
+            &:active {
+                background-color: #126dff;
+                box-shadow: 0 0 5px 2px #3A86FF;
+            }
+        }
+    }
+    .center {
+        display: flex;
+        span {
+            font-style: italic;
+            font-size: 1.2rem;
+            font-weight: 500;
+            color: #B0B0B0;
+        }
     }
     .right {
         display: flex;
@@ -52,6 +75,14 @@
             &:hover {
                 background-color: #f0f0f0;
             }
+        }
+    }
+}
+
+@media all and (max-width: 1300px) {
+    .navbar {
+        .center{
+            display: none;
         }
     }
 }

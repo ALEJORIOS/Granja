@@ -1,61 +1,73 @@
 <div class="students">
-    <button class="addStudent" (click)="addModal()">
-        Añadir Estudiante
-    </button>
-    <table>
-        <thead>
-            <th>Nombre</th>
-            <th>Apellidos</th>
-            <th>Grupo</th>
-            <th>Responsable</th>
-            <th>Contacto</th>
-            <th>Fecha de Nacimiento</th>
-        </thead>
-        <tbody>
-            <tr class="group1">
-                <td colspan="100">Pequeño Redil</td>
-            </tr>
-            <tr *ngFor="let student of groupOne" class="sg1" (dblclick)="editModal()">
-                <td>{{ student.name }}</td>
-                <td>{{ student.lastName }}</td>
-                <td>{{ student.group }}</td>
-                <td>{{ student.parent }}</td>
-                <td>{{ student.contact }}</td>
-                <td>{{ student.birthday }}</td>
-            </tr>
-            <tr class="group2">
-                <td colspan="100">Simiente Preciosa</td>
-            </tr>
-            <tr *ngFor="let student of groupTwo" class="sg2">
-                <td>{{ student.name }}</td>
-                <td>{{ student.lastName }}</td>
-                <td>{{ student.group }}</td>
-                <td>{{ student.parent }}</td>
-                <td>{{ student.contact }}</td>
-                <td>{{ student.birthday }}</td>
-            </tr>
-            <tr class="group3">
-                <td colspan="100">Sembradores</td>
-            </tr>
-            <tr *ngFor="let student of groupThree" class="sg3">
-                <td>{{ student.name }}</td>
-                <td>{{ student.lastName }}</td>
-                <td>{{ student.group }}</td>
-                <td>{{ student.parent }}</td>
-                <td>{{ student.contact }}</td>
-                <td>{{ student.birthday }}</td>
-            </tr>
-            <tr class="group4">
-                <td colspan="100">Cosechadores</td>
-            </tr>
-            <tr *ngFor="let student of groupFour" class="sg4">
-                <td>{{ student.name }}</td>
-                <td>{{ student.lastName }}</td>
-                <td>{{ student.group }}</td>
-                <td>{{ student.parent }}</td>
-                <td>{{ student.contact }}</td>
-                <td>{{ student.birthday }}</td>
-            </tr>
-        </tbody>
-    </table>
+    <div class="toolbar">
+        <button class="addStudent" (click)="addModal()">
+            Añadir Estudiante
+        </button>
+        <button class="addStudent" (click)="openSummary()">
+            Resumen
+        </button>
+    </div>
+    <div class="table">
+        <table>
+            <thead>
+                <th noWrap>Nombre</th>
+                <th noWrap>Apellidos</th>
+                <th noWrap>Miembro</th>
+                <th noWrap>Responsable</th>
+                <th noWrap>Contacto</th>
+                <th noWrap>Fecha de Nacimiento</th>
+                <th noWrap>Eliminar</th>
+            </thead>
+            <tbody>
+                <tr class="group1">
+                    <td colspan="100">Pequeño Redil</td>
+                </tr>
+                <tr *ngFor="let student of groupOne" class="sg1" (dblclick)="editModal(student)">
+                    <td noWrap>{{ student.name }}</td>
+                    <td noWrap>{{ student.lastName }}</td>
+                    <td noWrap>{{ student.membership | trueFalse }}</td>
+                    <td noWrap>{{ student.parent }}</td>
+                    <td noWrap>{{ student.contact }}</td>
+                    <td noWrap>{{ student.birthday | date: 'longDate' }}</td>
+                    <td noWrap><button class="delete" (click)="openDelete(student)">Eliminar</button></td>
+                </tr>
+                <tr class="group2">
+                    <td colspan="100">Simiente Preciosa</td>
+                </tr>
+                <tr *ngFor="let student of groupTwo" class="sg2" (dblclick)="editModal(student)">
+                    <td noWrap>{{ student.name }}</td>
+                    <td noWrap>{{ student.lastName }}</td>
+                    <td noWrap>{{ student.membership | trueFalse }}</td>
+                    <td noWrap>{{ student.parent }}</td>
+                    <td noWrap>{{ student.contact }}</td>
+                    <td noWrap>{{ student.birthday | date: 'longDate' }}</td>
+                    <td noWrap><button class="delete" (click)="openDelete(student)">Eliminar</button></td>
+                </tr>
+                <tr class="group3">
+                    <td colspan="100">Sembradores</td>
+                </tr>
+                <tr *ngFor="let student of groupThree" class="sg3" (dblclick)="editModal(student)">
+                    <td noWrap>{{ student.name }}</td>
+                    <td noWrap>{{ student.lastName }}</td>
+                    <td noWrap>{{ student.membership | trueFalse }}</td>
+                    <td noWrap>{{ student.parent }}</td>
+                    <td noWrap>{{ student.contact }}</td>
+                    <td noWrap>{{ student.birthday | date: 'longDate' }}</td>
+                    <td noWrap><button class="delete" (click)="openDelete(student)">Eliminar</button></td>
+                </tr>
+                <tr class="group4">
+                    <td colspan="100">Cosechadores</td>
+                </tr>
+                <tr *ngFor="let student of groupFour" class="sg4" (dblclick)="editModal(student)">
+                    <td noWrap>{{ student.name }}</td>
+                    <td noWrap>{{ student.lastName }}</td>
+                    <td noWrap>{{ student.membership | trueFalse }}</td>
+                    <td noWrap>{{ student.parent }}</td>
+                    <td noWrap>{{ student.contact }}</td>
+                    <td noWrap>{{ student.birthday | date: 'longDate' }}</td>
+                    <td noWrap><button class="delete" (click)="openDelete(student)">Eliminar</button></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
 </div>

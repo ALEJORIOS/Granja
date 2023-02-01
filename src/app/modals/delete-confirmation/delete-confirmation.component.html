@@ -1,0 +1,12 @@
+<div class="modal-header">
+    <h3>Confirmación</h3>
+    <button type='button' class='btn-close' aria-label='Close' (click)="close()"></button>
+</div>
+<div class="modal-body">
+    <span>¿Está seguro que desea eliminar el registro de <strong>{{data.name}}</strong> para siempre?</span>
+</div>
+<div class="modal-footer">
+    <button class="modal-button" (click)="delete()">
+        Confirmar
+    </button>
+</div>

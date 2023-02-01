@@ -1,0 +1,13 @@
+.modal-button {
+    border: none;
+    padding: 0.4em;
+    border-radius: 4px;
+    background-color: #D90429;
+    color: white;
+    font-weight: 600;
+    outline: none;
+    &:active {
+        background-color: #aa021e;
+        box-shadow: 0 0 5px 2px #D9042950;
+    }
+}

@@ -4,8 +4,12 @@
     justify-content: center;
     align-items: center;
     width: 100vw;
-    padding: 1rem 3rem;
-
+    padding-top: 1rem;
+    
+    .toolbar {
+        display: flex;
+        gap: 1em;
+    }
     .addStudent {
         border: none;
         border-radius: 4px;
@@ -14,58 +18,75 @@
         color: white;
         background-color: #3a86ff;
     }
-    table {
-        width: 100%;
-
-        @mixin groupN($bgcolor) {
-            background-color: $bgcolor;
-            color: white;
-            font-weight: 600;
-            td {
-                padding-left: 4px;
-            }
-        }
-
-        @mixin students($bgcolor) {
-            background-color: $bgcolor;
-            td {
-                padding-left: 6px;
-                cursor: pointer;
-            }
-        }
-
-        .group1 {
-            @include groupN(#d90429);
-            position: sticky;
-            top: 0
-        }
-        .group2 {
-            @include groupN(#0077b6);
-            position: sticky;
-            top: 0
-        }
-        .group3 {
-            @include groupN(#ffbe0b);
-            position: sticky;
-            top: 0
-        }
-        .group4 {
-            @include groupN(#7209b7);
-            position: sticky;
-            top: 0
-        }
-
-        .sg1 {
-            @include students(#d904290a);
-        }
-        .sg2 {
-            @include students(#0077b60a);
-        }
-        .sg3 {
-            @include students(#ffbe0b0a);
-        }
-        .sg4 {
-            @include students(#7209b70a);
+    .delete {
+        border: none;
+        margin: 0.2em 0;
+        border-radius: 4px;
+        background-color: #3a86ff;
+        color: white;
+        font-weight: 600;
+        outline: none;
+        &:active {
+            background-color: #126dff;
+            box-shadow: 0 0 5px 2px #3A86FF50;
         }
     }
+    .table {
+        width: 90%;
+        overflow-x: auto;
+        table {
+            width: 100%;
+        
+            @mixin groupN($bgcolor) {
+                background-color: $bgcolor;
+                color: white;
+                font-weight: 600;
+                position: sticky;
+                top: 0;
+                td {
+                    padding-left: 4px;
+                    border-style: hidden;
+                }
+
+            }
+    
+            @mixin students($bgcolor) {
+                background-color: $bgcolor;
+                border: none;
+                td {
+                    padding: 0 6px;
+                    cursor: pointer;
+                    &:not(:nth-child(1)) {
+                        border-left: 1px solid #3a86ff1A;
+                    }
+                }
+            }
+    
+            .group1 {
+                @include groupN(#d90429);
+            }
+            .group2 {
+                @include groupN(#0077b6);
+            }
+            .group3 {
+                @include groupN(#ffbe0b);
+            }
+            .group4 {
+                @include groupN(#7209b7);
+            }
+            .sg1 {
+                @include students(#d904290a);
+            }
+            .sg2 {
+                @include students(#0077b60a);
+            }
+            .sg3 {
+                @include students(#ffbe0b0a);
+            }
+            .sg4 {
+                @include students(#7209b70a);
+            }
+        }
+    }
+
 }
