@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 
 
-const url = "http://192.168.0.15:3000";
+const url = "http://192.168.0.105:3000";
 
 @Injectable({
   providedIn: 'root'
@@ -10,6 +10,10 @@ const url = "http://192.168.0.15:3000";
 export class AppService {
 
   constructor(private httpClient: HttpClient) { }
+
+  login(credentials: any) {
+    return this.httpClient.post<any>(`${url}/login`, credentials);
+  }
 
   getAllStudents() {
     return this.httpClient.get<any>(`${url}/students`);

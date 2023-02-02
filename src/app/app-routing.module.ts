@@ -8,7 +8,9 @@ const routes: Routes = [
   {path: "home", loadComponent: () => import('./pages/land/land.component')},
   {path: "students", loadComponent: () => import('./pages/students/students.component')},
   {path: "", redirectTo: "auth/login", pathMatch: "full"},
+  {path: "setting", loadComponent: () => import('./pages/setting/setting.component')},
   {path: "**", loadComponent: () => import('./pages/not-found/not-found.component')},
+
 ];
 
 @NgModule({

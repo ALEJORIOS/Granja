@@ -1,3 +1,5 @@
+import { FormControl, ReactiveFormsModule } from '@angular/forms';
+import { AppService } from 'src/app/services/app.service';
 import { Router } from '@angular/router';
 import { Component } from '@angular/core';
 
@@ -5,14 +7,20 @@ import { Component } from '@angular/core';
   standalone: true,
   selector: 'app-login',
   templateUrl: './login.component.html',
-  styleUrls: ['./login.component.scss']
+  styleUrls: ['./login.component.scss'],
+  imports: [ReactiveFormsModule]
 })
-export default class LoginComponent {
+export default class LoginComponen {
 
-  constructor(private router: Router) {}
-  login(event: Event) {
-    event.preventDefault();
-    console.log('Entra');
-    this.router.navigate(['/home']);
+  username = new FormControl('');
+  password = new FormControl('');
+  constructor(private router: Router, private appService: AppService) {}
+  onSubmit() {
+    this.appService.login({username: this.username.value, password: this.password.value}).subscribe({
+      next: (res) => {
+        this.router.navigate(['/home']);
+        localStorage.setItem("user", JSON.stringify(res));
+      }
+    })
   }
 }
