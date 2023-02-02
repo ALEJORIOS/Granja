@@ -60,6 +60,7 @@ export default class StudentsComponent implements OnInit {
   openDelete(record: any) {
     const confirmation = this.modalService.open(DeleteConfirmationComponent, { size: 'sm' });
     confirmation.componentInstance.data = record;
+    confirmation.componentInstance.member = "student";
     confirmation.result.then((result) => {},
     (reason) => {
       if(reason === "refresh") this.getData();

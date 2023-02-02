@@ -20,6 +20,7 @@ export default class LoginComponen {
       next: (res) => {
         this.router.navigate(['/home']);
         localStorage.setItem("user", JSON.stringify(res));
+        this.appService.token.next(res.token);
       }
     })
   }

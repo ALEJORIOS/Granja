@@ -13,14 +13,24 @@ import { AppService } from 'src/app/services/app.service';
 export class DeleteConfirmationComponent {
 
   @Input('data') data: any;
+  @Input('member') member!: string;
   constructor(private modalService: NgbModal, private appService: AppService) {}
 
   close() {
     this.modalService.dismissAll("close");
   }
 
-  delete() {
+  deleteStudent() {
     this.appService.deleteRecord(this.data._id).subscribe({
+      next: () => {
+        this.modalService.dismissAll("refresh");
+      },
+      error: (err) => console.error(err)
+    })
+  }
+
+  deleteTeacher() {
+    this.appService.deleteTeacher(this.data._id).subscribe({
       next: () => {
         this.modalService.dismissAll("refresh");
       },

@@ -1,5 +1,7 @@
 <div class="layout">
     <navbar *ngIf="showBars"></navbar>
-    <router-outlet></router-outlet>
+    <div class="content">
+        <router-outlet></router-outlet>
+    </div>
     <footbar *ngIf="showBars"></footbar>
 </div>

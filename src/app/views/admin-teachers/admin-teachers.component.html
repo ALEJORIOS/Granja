@@ -1,0 +1,32 @@
+<h3>Maestros</h3>
+<div class="toolbar">
+    <button (click)="openAdd()">Agregar Maestro</button>
+</div>
+<table>
+    <thead>
+        <tr>
+            <th>Nombres</th>
+            <th>Apellidos</th>
+            <th>Rol</th>
+            <th>Celular</th>
+            <th>Correo Electrónico</th>
+            <th>Fecha de Cumpleaños</th>
+            <th>Usuario</th>
+            <th>Editar</th>
+            <th>Eliminar</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let teacher of teachers">
+            <td noWrap>{{ teacher.name }}</td>
+            <td noWrap>{{ teacher.lastName }}</td>
+            <td noWrap>{{ teacher.role }}</td>
+            <td noWrap>{{ teacher.contact }}</td>
+            <td noWrap>{{ teacher.email }}</td>
+            <td noWrap>{{ teacher.birthday | date:"MMMM d" }}</td>
+            <td noWrap>{{ teacher.username }}</td>
+            <td><button class="delete" (click)="openEdit(teacher)">Editar</button></td>
+            <td><button class="delete" (click)="openDelete(teacher)">Eliminar</button></td>
+        </tr>
+    </tbody>
+</table>

@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
+import { AppService } from 'src/app/services/app.service';
 
 @Component({
   standalone: true,
@@ -9,9 +10,22 @@ import { Router } from '@angular/router';
 })
 export class NavbarComponent {
 
-  constructor(private router: Router) {}
+  name: string = "";
+  constructor(private router: Router, appService: AppService) {
+    appService.token.subscribe({
+      next: (res) => {
+        if(res) {
+          this.name = JSON.parse(window.atob(res.split('.')[1])).name;
+        }
+      }
+    })
+  }
 
   toHome() {
     this.router.navigate(['/home']);
+  }
+
+  logout() {
+    this.router.navigate(['/auth/login']);
   }
 }

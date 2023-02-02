@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { AppService } from 'src/app/services/app.service';
 
 @Component({
   standalone: true,
@@ -7,5 +8,7 @@ import { Component } from '@angular/core';
   styleUrls: ['./not-found.component.scss']
 })
 export default class NotFoundComponent {
+
+  constructor(private appService: AppService) {}
 
 }

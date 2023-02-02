@@ -1,8 +1,9 @@
 .home {
     display: grid;
+    height: 100%;
     grid-auto-rows: 12rem;
     grid-template-columns: repeat(auto-fit, minmax(20rem, 22rem));
-    padding: 2rem;
+    padding: 2rem 10vw;
     justify-content: center;
 
     .cardOption {
@@ -23,33 +24,31 @@
         }
 
     }
-    .recordAttendance {
-        background-color: #d90429;
-        box-shadow: #d9042950 6px 2px 16px 0px, #ffffffdd -6px -2px 16px 0px;
+
+    @mixin card($bgcolor, $bscolor) {
+        background-color: $bgcolor;
+        box-shadow: $bscolor 6px 2px 16px 0px, #ffffffdd -6px -2px 16px 0px;
         color: white;
         font-weight: 600;
         font-size: 1.5rem;
+    }
+    .recordAttendance {
+        @include card(#d90429, #d9042950);
     }
     .rateStudents {
-        background-color: #0077b6;
-        box-shadow: #0077b650 6px 2px 16px 0px, #ffffffdd -6px -2px 16px 0px;
-        color: white;
-        font-weight: 600;
-        font-size: 1.5rem;
+        @include card(#0077b6, #0077b650);
     }
     .seeStudents {
-        background-color: #ffbe0b;
-        box-shadow: #ffbe0b50 6px 2px 16px 0px, #ffffffdd -6px -2px 16px 0px;
-        color: white;
-        font-weight: 600;
-        font-size: 1.5rem;
+        @include card(#ffbe0b, #ffbe0b50);
     }
     .news {
-        background-color: #7209b7;
-        box-shadow: #7209b750 6px 2px 16px 0px, #ffffffdd -6px -2px 16px 0px;
-        color: white;
-        font-weight: 600;
-        font-size: 1.5rem;
+        @include card(#7209b7, #7209b750);
+    }
+    .controlPanel {
+        @include card(#f08700, #f0870050);
+    }
+    .programmer {
+        @include card(#38b000, #38b00050);
     }
 }
 
