@@ -1,0 +1,109 @@
+.rate {
+    width: 100vw;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 1rem 4rem;
+    .achieves {
+        display: flex;
+        gap: 1em;
+        margin-bottom: 1em;
+    }
+    .achieve-card {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        border: 3px solid #3A86FF;
+        padding: 0.4em;
+        border-radius: 1em;
+        cursor: pointer;
+        user-select: none;
+        transition: 0.06s background ease-in;
+        transition: 0.1s transform ease-in;
+        span {
+            font-weight: 600;
+        }
+        &:hover {
+            transform: scale(1.1);
+            transition: 0.1s transform ease-in;
+        }
+    }
+    .card-selected {
+        background-color: #3A86FF;
+        transition: 0.06s all ease-in-out;
+        color: white;
+    }
+    .dateSpace {
+        display: flex;
+        gap: 1em;
+        margin-bottom: 1em;
+        .date {
+            height: 2.4em;
+            width: 13em;
+            margin-top: 0.6em;
+            border: 3px solid #3A86FF;
+            outline: none;
+            border-radius: 8px;
+            padding: 0 0.4em;
+        }
+        select {
+            height: 2.4em;
+            width: 10em;
+            margin-top: 0.6em;
+            border: 3px solid #3A86FF;
+            outline: none;
+            border-radius: 8px;
+            padding: 0 0.4em;
+        }
+    }
+    .accordeon {
+        width: 100%;
+        max-width: 600px;
+        .tab-button {
+            border: none;
+            background-color: transparent;
+            outline: none;
+        }
+        .selectAll {
+            margin-left: 1em;
+            height: 2em;
+            font-size: 0.8em;
+            border: none;
+            border-radius: 1em;
+            background-color: #126dff;
+            color: white;
+            font-weight: 400;
+        }
+    }
+    .students {
+        width: 100%;
+        tr {
+            td {
+                height: 2.2rem;
+                cursor: pointer;
+            }
+            &:hover {
+                background-color: #3A86FF10;
+            }
+        }
+    }
+    .save {
+        margin-top: 1em;
+        border-radius: 4px;
+        width: 100%;
+        border: none;
+        background-color: #3A86FF;
+        color: white;
+        font-weight: 600;
+        font-size: 1.2rem;
+        box-shadow: 0 0 5px 2px #e0e0e0;
+        width: 100%;
+        max-width: 600px;
+        height: 3em;
+        font-size: 1.4rem;
+        &:active {
+            background-color: #126dff;
+            box-shadow: 0 0 5px 2px #3A86FF;
+        }
+    }
+}

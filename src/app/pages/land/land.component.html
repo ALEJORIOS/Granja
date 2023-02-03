@@ -1,8 +1,6 @@
 <div class="home">
-    <div (click)="navigateTo('students')" class="cardOption recordAttendance">Registrar Asistencia</div>
-    <div (click)="navigateTo('students')" class="cardOption rateStudents">Puntuar Estudiantes</div>
+    <div (click)="navigateTo('rate-students')" class="cardOption rateStudents">Puntuar Estudiantes</div>
     <div (click)="navigateTo('students')" class="cardOption seeStudents">Ver Estudiantes</div>
-    <div (click)="navigateTo('students')" class="cardOption news">Noticias</div>
     <div *ngIf="admin" (click)="navigateTo('control')" class="cardOption controlPanel">Panel de Control</div>
-    <div (click)="navigateTo('students')" class="cardOption programmer">Programación de Clases</div>
+    <div *ngIf="admin" (click)="navigateTo('students')" class="cardOption programmer">Programación de Clases</div>
 </div>
