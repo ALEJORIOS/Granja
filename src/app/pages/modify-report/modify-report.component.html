@@ -12,6 +12,7 @@
             <option [value]="'second'">Segundo Culto</option>
         </select>
     </div>
+    <span style="margin-bottom: 1em;"><strong>{{ translateTeacher(report?.teacher)[0] }}:</strong> {{ translateTeacher(report?.teacher)[1] }}</span>
     <ngb-accordion class="accordeon">
         <ngb-panel>
             <ng-template ngbPanelHeader let-opened="opened">
@@ -88,5 +89,6 @@
     </ngb-accordion>
     <alert *ngIf="alert.show" [type]="alert.type">{{ alert.msg }}</alert>
     <button class="save" [disabled]="!enableSave" (click)="save()">Guardar</button>
+    <button class="delete" [disabled]="!enableSave" (click)="deleteReport()">Eliminar Reporte</button>
     <i *ngIf="info.show">{{ info.msg }}</i>
 </div>

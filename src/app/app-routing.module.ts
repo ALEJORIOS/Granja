@@ -9,6 +9,8 @@ const routes: Routes = [
   {path: "students", loadComponent: () => import('./pages/students/students.component')},
   {path: "rate-students", loadComponent: () => import('./pages/rate-students/rate-students.component')},
   {path: "control", loadComponent: () => import('./pages/control-panel/control-panel.component')},
+  {path: "reports", loadComponent: () => import('./pages/reports/reports.component')},
+  {path: "modify-report", loadComponent: () => import('./pages/modify-report/modify-report.component')},
   {path: "", redirectTo: "auth/login", pathMatch: "full"},
   {path: "setting", loadComponent: () => import('./pages/setting/setting.component')},
   {path: "**", loadComponent: () => import('./pages/not-found/not-found.component')},

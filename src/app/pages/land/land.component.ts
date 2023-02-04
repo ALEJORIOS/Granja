@@ -33,4 +33,6 @@ export default class LandComponent implements OnInit {
   navigateTo(route: string) {
     this.router.navigate([route]);
   }
+
+  
 }

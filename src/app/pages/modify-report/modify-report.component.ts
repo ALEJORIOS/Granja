@@ -1,19 +1,22 @@
-import { AppService } from 'src/app/services/app.service';
-import { NgbAccordionModule } from '@ng-bootstrap/ng-bootstrap';
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
+import { AppService } from 'src/app/services/app.service';
 import { AlertComponent } from 'src/app/cmps/alert/alert.component';
+import { NgbAccordionModule } from '@ng-bootstrap/ng-bootstrap';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
-  selector: 'app-rate-students',
+  selector: 'app-modify-report',
   standalone: true,
   imports: [CommonModule, NgbAccordionModule, ReactiveFormsModule, AlertComponent],
-  templateUrl: './rate-students.component.html',
-  styleUrls: ['./rate-students.component.scss']
+  templateUrl: './modify-report.component.html',
+  styleUrls: ['./modify-report.component.scss']
 })
-export default class RateStudentsComponent implements OnInit {
 
+export default class ModifyReportComponent {
+  reportID: string = "";
+  report: any;
   achievements: any[] = [];
   currentAchievement: string = "";
   allStudents: any = [];
@@ -42,15 +45,40 @@ export default class RateStudentsComponent implements OnInit {
     teacher: new FormControl('')
   })
 
-  constructor(private appService: AppService) {}
+  constructor(private appService: AppService, private aRoute: ActivatedRoute, private router: Router) {}
 
   ngOnInit(): void {
+    this.aRoute.queryParams.subscribe(params => {
+      if(Object.keys(params).length !== 0) {
+        this.reportID = params['id'];
+      }else{
+        this.router.navigate(['/reports']);
+      }
+    })
     this.getAchievements();
     this.getStudents();
+    this.getAllTeachers();
+    this.appService.getOneReport(this.reportID).subscribe({
+      next: (res) => {
+        this.report = res;
+        this.formGroup.controls.date.setValue(this.report.date);
+        this.formGroup.controls.service.setValue(this.report.service);
+        this.setAchievements();
+      }
+    })
     this.appService.token.subscribe({
       next: (res) => {
         if(res) this.formGroup.controls.teacher.setValue(JSON.parse(window.atob(res.split('.')[1])).id);
       }
+    })
+  }
+
+  getAllTeachers() {
+    this.appService.getAllTeachers().subscribe({
+      next: (res) => {
+        this.allTeachers = res;
+      },
+      error: (err) => console.error(err)
     })
   }
 
@@ -63,15 +91,20 @@ export default class RateStudentsComponent implements OnInit {
     })
   }
 
+  setAchievements() {
+    this.allStudents.map((student: any) => {
+      this.report.achievements.forEach((ach: any) => {
+        ach.students.forEach((std: any) => {
+          if(std._id === student._id) {
+            student.achievements.push(ach.name);
+          }
+        })
+      })
+    })
+  }
+
   selectAchievement(achieve: string) {
     this.currentAchievement = achieve;
-    Object.keys(this.selectAllName).forEach((group: string) => {
-      if(this.currentAchievement && this.students[group].every((std: any) => std.achievements.includes(this.currentAchievement))) {
-        this.selectAllName[group] = "Deseleccionar Todos";
-      }else{
-        this.selectAllName[group] = "Seleccionar Todos";
-      }
-    })
   }
 
 
@@ -137,36 +170,13 @@ export default class RateStudentsComponent implements OnInit {
       this.alert.show = true;
       error = true;
     }
-    if(!this.formGroup.controls.teacher.value) {
-      this.alert.type = "error";
-      this.alert.msg = "Elige el Maestro";
-      this.alert.show = true;
-      error = true;
-    }
     if(error) {
       this.enableSave = true;
     }else{
       this.info.msg = "Guardando reporte...";
       this.info.show = true;
       this.enableSave = false;
-      this.appService.getVerificationReportExistence({
-        date: this.formGroup.controls.date.value, 
-        service: this.formGroup.controls.service.value,
-        teacher: this.formGroup.controls.teacher.value
-      }).subscribe({
-        next: (res) => {
-          if(res.length === 0) {
-            this.uploadReport();
-          }else{
-            this.alert.type = "error";
-            this.alert.msg = "Ya subiste este reporte";
-            this.alert.show = true;
-            this.enableSave = true;
-            this.info.show = false;
-          }
-        },
-        error: (err) => console.error(err)
-      })
+      this.uploadReport();
     }
   }
 
@@ -177,20 +187,40 @@ export default class RateStudentsComponent implements OnInit {
       const requestBody: any = {
         date: this.formGroup.controls.date.value,
         service: this.formGroup.controls.service.value,
-        teacher: this.formGroup.controls.teacher.value,
-        achievements: this.achievements
+        teacher: this.report.teacher,
+        achievements: this.achievements,
+        id: this.report._id
       }
-  
-      this.appService.createReport(requestBody).subscribe({
+
+      this.appService.editReport(requestBody).subscribe({
         next: () => {
           this.alert.type = "success";
-          this.alert.msg = "Reporte enviado correctamente";
+          this.alert.msg = "Reporte editado correctamente";
           this.alert.show = true;
+          this.enableSave = true;
         },
         error: (err) => console.error(err),
         complete: () => {
           this.info.show = false;
         }
       })
+  }
+
+  translateTeacher(id: string) {
+    if(this.allTeachers.length !== 0) {
+      const teacher = this.allTeachers.filter((teacher: any) => teacher._id === id)[0];
+      return [teacher?.gender === "Male" ? "Maestro" : "Maestra",`${teacher?.name || ""} ${teacher?.lastName || ""}`]
+    }else{
+      return ["", ""];
+    }
+  }
+
+  deleteReport() {
+    this.appService.deleteReport(this.reportID).subscribe({
+      next: () => {
+        this.router.navigate(['/reports']);
+      },
+      error: (err) => console.error(err)
+    })
   }
 }

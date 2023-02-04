@@ -3,7 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { BehaviorSubject } from 'rxjs';
 
 
-const url = "http://192.168.0.105:3000";
+const url = "http://192.168.0.15:3000";
 
 @Injectable({
   providedIn: 'root'
@@ -37,6 +37,18 @@ export class AppService {
   getAchievements() {
     return this.httpClient.get<any>(`${url}/achievements`);
   }
+  
+  getReports() {
+    return this.httpClient.get<any>(`${url}/reports`);
+  }
+
+  getVerificationReportExistence(body: any) {
+    return this.httpClient.post<any>(`${url}/verify-existence-of-report`, body);
+  }
+
+  getOneReport(id: string) {
+    return this.httpClient.get<any>(`${url}/one-report`, {params: {id}});
+  }
 
   createStudent(body: any) {
     return this.httpClient.post<any>(`${url}/add`, body);
@@ -44,6 +56,14 @@ export class AppService {
 
   createTeacher(body: any) {
     return this.httpClient.post<any>(`${url}/add-teacher`, body);
+  }
+
+  createReport(body: any) {
+    return this.httpClient.post<any>(`${url}/report`, body);
+  }
+
+  editReport(body: any) {
+    return this.httpClient.put<any>(`${url}/edit-report`, body);
   }
 
   editStudent(body: any) {
@@ -55,10 +75,14 @@ export class AppService {
   }
 
   deleteRecord(id: string) {
-    return this.httpClient.delete<any>(`${url}/delete`, {params: {id: id}});
+    return this.httpClient.delete<any>(`${url}/delete`, {params: {id}});
   }
 
   deleteTeacher(id: string) {
-    return this.httpClient.delete<any>(`${url}/delete-teacher`, {params: {id: id}});
+    return this.httpClient.delete<any>(`${url}/delete-teacher`, {params: {id}});
+  }
+
+  deleteReport(id: string) {
+    return this.httpClient.delete<any>(`${url}/delete-report`, {params: {id}});
   }
 }
