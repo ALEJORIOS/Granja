@@ -3,7 +3,8 @@ import { HttpClient } from '@angular/common/http';
 import { BehaviorSubject } from 'rxjs';
 
 
-const url = "https://granja-back.vercel.app";
+// const url = "http://192.168.0.105:3000";
+const url = "https://granja-back.vercel.app/";
 
 @Injectable({
   providedIn: 'root'
@@ -42,6 +43,10 @@ export class AppService {
     return this.httpClient.get<any>(`${url}/reports`);
   }
 
+  getIcons() {
+    return this.httpClient.get<any>(`${url}/icons`);
+  }
+
   getVerificationReportExistence(body: any) {
     return this.httpClient.post<any>(`${url}/verify-existence-of-report`, body);
   }
@@ -62,6 +67,10 @@ export class AppService {
     return this.httpClient.post<any>(`${url}/report`, body);
   }
 
+  createAchievement(body: any) {
+    return this.httpClient.post<any>(`${url}/add-achievement`, body);
+  }
+
   editReport(body: any) {
     return this.httpClient.put<any>(`${url}/edit-report`, body);
   }
@@ -72,6 +81,10 @@ export class AppService {
 
   editTeacher(body: any) {
     return this.httpClient.put<any>(`${url}/edit-teacher`, body);
+  }
+
+  editAchievement(body: any) {
+    return this.httpClient.put<any>(`${url}/edit-achievement`, body);
   }
 
   deleteRecord(id: string) {

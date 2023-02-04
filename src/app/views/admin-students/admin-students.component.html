@@ -1,1 +1,19 @@
-<p>admin-students works!</p>
+<h3>Logros</h3>
+<button class="addAchievement" (click)="openAdd()">Agregar Logro</button>
+<table>
+    <tr>
+        <th>Nombre</th>
+        <th>Valor</th>
+        <th>Icono</th>
+        <th>Editar</th>
+        <th>Eliminar</th>
+    </tr>
+    <tr *ngFor="let achievement of achievements">
+        <td noWrap>{{ achievement.name }}</td>
+        <td noWrap>{{ achievement.value }}</td>
+        <td noWrap><img [src]="achievement.image" height="32px"></td>
+        <td noWrap><button class="delete" (click)="openEdit(achievement)">Editar</button></td>
+        <td noWrap><button class="delete" (click)="deleteAchievement(achievement)">Eliminar</button></td>
+    </tr>
+
+</table>

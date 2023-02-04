@@ -1,0 +1,26 @@
+<div class="modal-header">
+    <h3 *ngIf="!edit">Crear Logro</h3>
+    <h3 *ngIf="edit">Editar Logro</h3>
+</div>
+<div class="modal-body">
+    <div class="form" [formGroup]="form">
+        <table>
+            <tr>
+                <td><span>Nombre: </span></td>
+                <td><input type="text" formControlName="name"></td>
+            </tr>
+            <tr>
+                <td><span>Valor: </span></td>
+                <td><input type="number" formControlName="value"></td>
+            </tr>
+        </table>
+        <span>Icono: </span>
+        <div class="icon-selection">
+            <div *ngFor="let icon of icons" (click)="selectIcon(icon.path)" [ngClass]="{'icon': true, 'selected': form.controls.icon.value === icon.path}"><img [title]="icon.name" [src]="icon.path" height="32px"></div>
+        </div>
+    </div>
+</div>
+<div class="modal-footer">
+    <button *ngIf="edit" class="create" (click)="editAchievement()">Actualizar Logro</button>
+    <button *ngIf="!edit" class="create" (click)="saveAchievement()">Crear Logro</button>
+</div>
