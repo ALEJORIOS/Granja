@@ -14,6 +14,8 @@ import { AlertComponent } from 'src/app/cmps/alert/alert.component';
 })
 export default class RateStudentsComponent implements OnInit {
 
+  reports: any = [];
+  reportsLoaded: boolean = false;
   achievements: any[] = [];
   currentAchievement: string = "";
   allStudents: any = [];
@@ -47,6 +49,7 @@ export default class RateStudentsComponent implements OnInit {
   ngOnInit(): void {
     this.getAchievements();
     this.getStudents();
+    this.getReports();
     this.appService.token.subscribe({
       next: (res) => {
         if(res) this.formGroup.controls.teacher.setValue(JSON.parse(window.atob(res.split('.')[1])).id);
@@ -73,7 +76,6 @@ export default class RateStudentsComponent implements OnInit {
       }
     })
   }
-
 
   selectAll(group: string) {
     if(this.students[group].every((std: any) => std.achievements.includes(this.currentAchievement))) {
@@ -104,10 +106,6 @@ export default class RateStudentsComponent implements OnInit {
     }
   }
 
-  show() {
-    console.log(this.students);
-  }
-
   getStudents() {
     this.appService.getAllStudents().subscribe({
       next: (res) => {
@@ -119,6 +117,29 @@ export default class RateStudentsComponent implements OnInit {
         this.students.g4 = res.filter((stud: any) => stud.group === "4");
       }
     })
+  }
+
+  getReports() {
+    this.appService.getReports().subscribe({
+      next: (res) => {
+        this.reports = res;
+        this.reportsLoaded = true;
+      }
+    })
+  }
+
+  show() {
+    this.allStudents.forEach((std: any) => {
+      console.log('Resultado: ', this.checkStudentReport(std._id));
+    })
+  }
+
+  checkStudentReport(id: string) {
+    if(this.reportsLoaded) {
+      return false;
+    }else{
+      return true;
+    }
   }
 
   translate2File(name: string): String {

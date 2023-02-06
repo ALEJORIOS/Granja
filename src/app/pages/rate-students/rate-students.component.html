@@ -89,4 +89,5 @@
     <alert *ngIf="alert.show" [type]="alert.type">{{ alert.msg }}</alert>
     <button class="save" [disabled]="!enableSave" (click)="save()">Guardar</button>
     <i *ngIf="info.show">{{ info.msg }}</i>
+    <button (click)='show()'>Show</button>
 </div>
