@@ -17,6 +17,7 @@ export class AddStudentComponent implements OnInit {
   
   @Input('edit') edit: boolean = false;
   @Input('data') data?: any;
+  teachers: any =[];
   birthday: boolean = true;
   alert: any = {
     type: "error",
@@ -37,12 +38,14 @@ export class AddStudentComponent implements OnInit {
       group: new FormControl("1"),
       membership: new FormControl(false),
       gender: new FormControl("Male"),
-      points: new FormControl()
+      points: new FormControl(),
+      hedge: new FormControl('')
   })
 
   constructor(private appService: AppService, private modalService: NgbModal, private groupService: GroupService) {}
   
   ngOnInit(): void {
+    this.getTeachers();
     this.groupService.getAges();
     this.groupService.agesLoad.subscribe({
       next: (res) => {
@@ -66,12 +69,22 @@ export class AddStudentComponent implements OnInit {
       this.formData.controls.membership.setValue(this.data.membership);
       this.formData.controls.gender.setValue(this.data.gender);
       this.formData.controls.points.setValue(this.data.points);
+      this.formData.controls.hedge.setValue(this.data.hedge);
       this.birthday = this.data.opt === "birthday" ? true : false;
     }
   }
 
   close() {
     this.modalService.dismissAll('close');
+  }
+
+  getTeachers() {
+    this.appService.getAllTeachers().subscribe({
+      next: (res) => {
+        this.teachers = res;
+      },
+      error: (err) => console.error(err)
+    })
   }
 
   add() {
@@ -111,8 +124,9 @@ export class AddStudentComponent implements OnInit {
         group: this.formData.controls.group.value,
         opt: this.birthday ? "birthday" : "group",
         gender: this.formData.controls.gender.value,
-        points: 0,
-        membership: true
+        hedge: this.formData.controls.hedge.value,
+        membership: true,
+        points: 0
       }
       console.log('El body es: ', requestBody);
       this.appService.createStudent(requestBody).subscribe({
@@ -168,7 +182,8 @@ export class AddStudentComponent implements OnInit {
         opt: this.birthday ? "birthday" : "group",
         membership: this.formData.controls.membership.value,
         points: this.formData.controls.points.value,
-        gender: this.formData.controls.gender.value
+        gender: this.formData.controls.gender.value,
+        hedge: this.formData.controls.hedge.value
       }
       this.appService.editStudent(requestBody).subscribe({
         next: () => {

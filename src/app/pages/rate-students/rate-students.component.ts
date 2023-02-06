@@ -4,6 +4,7 @@ import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { AlertComponent } from 'src/app/cmps/alert/alert.component';
+import { ThisReceiver } from '@angular/compiler';
 
 @Component({
   selector: 'app-rate-students',
@@ -94,17 +95,23 @@ export default class RateStudentsComponent implements OnInit {
   }
 
   setAchievement(studentId: string) {
-    let group = "g"+this.allStudents.filter((std: any) => std._id === studentId)[0].group;
-    if(this.allStudents.filter((std: any) => std._id === studentId)[0].achievements.includes(this.currentAchievement)) {
-      this.allStudents.filter((std: any) => std._id === studentId)[0].achievements = this.allStudents.filter((std: any) => std._id === studentId)[0].achievements.filter((ach: string) => ach !== this.currentAchievement);
-    }else{
-      this.allStudents.filter((std: any) => std._id === studentId)[0].achievements.push(this.currentAchievement);
+    if(this.checkAvailability(studentId) === true) {
+      let group = "g"+this.allStudents.filter((std: any) => std._id === studentId)[0].group;
+      if(this.allStudents.filter((std: any) => std._id === studentId)[0].achievements.includes(this.currentAchievement)) {
+        this.allStudents.filter((std: any) => std._id === studentId)[0].achievements = this.allStudents.filter((std: any) => std._id === studentId)[0].achievements.filter((ach: string) => ach !== this.currentAchievement);
+      }else{
+        this.allStudents.filter((std: any) => std._id === studentId)[0].achievements.push(this.currentAchievement);
+      }
+      if(this.currentAchievement && this.students[group].every((std: any) => std.achievements.includes(this.currentAchievement))) {
+        this.selectAllName[group] = "Deseleccionar Todos";
+      }else{
+        this.selectAllName[group] = "Seleccionar Todos";
+      }
     }
-    if(this.currentAchievement && this.students[group].every((std: any) => std.achievements.includes(this.currentAchievement))) {
-      this.selectAllName[group] = "Deseleccionar Todos";
-    }else{
-      this.selectAllName[group] = "Seleccionar Todos";
-    }
+  }
+
+  show() {
+    console.log('Estudiantes: ', this.allStudents);
   }
 
   getStudents() {
@@ -130,20 +137,21 @@ export default class RateStudentsComponent implements OnInit {
     })
   }
 
-  checkAvailability(id: string):boolean {
-    console.log('Entra aquí')
+  checkAvailability(id: string): boolean {
     if(this.loadedReport) {
       if(this.reports.filter((rpt: any) => rpt.date === this.formGroup.controls.date.value).length > 0) {
         if(this.reports.filter((rpt: any) => rpt.date === this.formGroup.controls.date.value)[0].achievements.some((ach: any) => {
-          console.log('epa: ', ach.students.some((std: any) => std._id === id));
           return ach.students.some((std: any) => std._id === id);
         })) {
-          console.log('Es falso')
-          return false
+          this.allStudents.map((std: any) => {
+            if(std._id === id) {
+              std.achievements = [];
+            }
+          })
+          return false;
         }else{
-          console.log('Es verdadero1');
           return true;
-        }
+        } 
       }else{
         return true;
       }
@@ -202,6 +210,8 @@ export default class RateStudentsComponent implements OnInit {
   }
 
   uploadReport() {
+      this.info.msg = "Subiendo Reporte...";
+      this.info.show = true;
       this.achievements.map((ach: any) => {
         ach.students = this.allStudents.filter((std: any) => std.achievements.includes(ach.name));
       });
@@ -214,14 +224,43 @@ export default class RateStudentsComponent implements OnInit {
   
       this.appService.createReport(requestBody).subscribe({
         next: () => {
-          this.alert.type = "success";
-          this.alert.msg = "Reporte enviado correctamente";
-          this.alert.show = true;
+          this.rateStudents();
         },
-        error: (err) => console.error(err),
-        complete: () => {
-          this.info.show = false;
+        error: (err) => {
+          console.error(err);
+          this.alert.type = "error";
+          this.alert.msg = "Problema al subir Reporte";
+          this.alert.show = true;
         }
       })
+  }
+
+  rateStudents() {
+    let requestBody: any = {rate: []};
+    this.allStudents.map((std: any) => {
+      const achievePoints: number = std.achievements.reduce((acc: number, ach: string) => {
+        return acc = acc +  this.achievements.filter((achieve: any) => achieve.name === ach)[0].value;
+      }, 0);
+      std.points = std.points + achievePoints;
+    })
+    this.allStudents.forEach((std: any) => {
+      requestBody.rate.push({id: std._id, points: std.points});
+    })
+    this.appService.rateStudents(requestBody).subscribe({
+      next: () => {
+        this.alert.type = "success";
+        this.alert.msg = "Reporte subido correctamente";
+        this.alert.show = true;
+      },
+      error: (err) => {
+        console.error(err);
+        this.alert.type = "error";
+        this.alert.msg = "Problema al calificar Estudiantes";
+        this.alert.show = true;
+      },
+      complete: () => {
+        this.info.show = false;
+      }
+    })
   }
 }

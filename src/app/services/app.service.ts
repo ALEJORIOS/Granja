@@ -3,7 +3,8 @@ import { HttpClient } from '@angular/common/http';
 import { BehaviorSubject } from 'rxjs';
 
 
-const url = "http://192.168.0.105:3000";
+const url = "http://192.168.0.15:3000";
+// const url = "http://192.168.0.105:3000";
 // const url = "https://granja-back.vercel.app";
 
 @Injectable({
@@ -69,6 +70,10 @@ export class AppService {
 
   createAchievement(body: any) {
     return this.httpClient.post<any>(`${url}/add-achievement`, body);
+  }
+
+  rateStudents(body: any) {
+    return this.httpClient.put<any>(`${url}/rate-students`, body);
   }
 
   editReport(body: any) {

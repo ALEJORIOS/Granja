@@ -10,6 +10,11 @@
         <label><span>Apellido </span><input type="text" formControlName="lastName"></label>
         <label><span>Responsable </span><input type="text" formControlName="parent"></label>
         <label><span>Teléfono </span><input type="text" formControlName="contact"></label>
+        <label><span>Cobertura </span>
+            <select formControlName="hedge">
+                <option *ngFor="let teacher of teachers" [value]="teacher._id">{{ teacher.name }} {{ teacher.lastName }}</option>
+            </select>
+        </label>
         <label><span>Género</span>
             <div class="gender">
                 <label><input type="radio" name="gender" [value]="'Male'" formControlName="gender">&nbsp;Masculino</label>
