@@ -5,6 +5,7 @@
         <th>Nombre</th>
         <th>Valor</th>
         <th>Icono</th>
+        <th>Descripción</th>
         <th>Editar</th>
         <th>Eliminar</th>
     </tr>
@@ -12,6 +13,7 @@
         <td noWrap>{{ achievement.name }}</td>
         <td noWrap>{{ achievement.value }}</td>
         <td noWrap><img [src]="achievement.image" height="32px"></td>
+        <td noWrap>{{ achievement.description }}</td>
         <td noWrap><button class="delete" (click)="openEdit(achievement)">Editar</button></td>
         <td noWrap><button class="delete" (click)="deleteAchievement(achievement)">Eliminar</button></td>
     </tr>

@@ -16,6 +16,7 @@
                 <th noWrap>Responsable</th>
                 <th noWrap>Contacto</th>
                 <th noWrap>Fecha de Nacimiento</th>
+                <th noWrap>Talentos</th>
                 <th noWrap>Eliminar</th>
             </thead>
             <tbody>
@@ -29,6 +30,7 @@
                     <td noWrap>{{ student.parent }}</td>
                     <td noWrap>{{ student.contact }}</td>
                     <td noWrap>{{ student.birthday | date: 'longDate' }}</td>
+                    <td noWrap>{{ student.points }}</td>
                     <td noWrap><button class="delete" (click)="openDelete(student)">Eliminar</button></td>
                 </tr>
                 <tr class="group2">
@@ -41,6 +43,7 @@
                     <td noWrap>{{ student.parent }}</td>
                     <td noWrap>{{ student.contact }}</td>
                     <td noWrap>{{ student.birthday | date: 'longDate' }}</td>
+                    <td noWrap>{{ student.points }}</td>
                     <td noWrap><button class="delete" (click)="openDelete(student)">Eliminar</button></td>
                 </tr>
                 <tr class="group3">
@@ -53,6 +56,7 @@
                     <td noWrap>{{ student.parent }}</td>
                     <td noWrap>{{ student.contact }}</td>
                     <td noWrap>{{ student.birthday | date: 'longDate' }}</td>
+                    <td noWrap>{{ student.points }}</td>
                     <td noWrap><button class="delete" (click)="openDelete(student)">Eliminar</button></td>
                 </tr>
                 <tr class="group4">
@@ -65,6 +69,7 @@
                     <td noWrap>{{ student.parent }}</td>
                     <td noWrap>{{ student.contact }}</td>
                     <td noWrap>{{ student.birthday | date: 'longDate' }}</td>
+                    <td noWrap>{{ student.points }}</td>
                     <td noWrap><button class="delete" (click)="openDelete(student)">Eliminar</button></td>
                 </tr>
             </tbody>

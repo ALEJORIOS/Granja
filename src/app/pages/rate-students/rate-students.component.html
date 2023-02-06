@@ -3,6 +3,7 @@
         <div [ngClass]="{'achieve-card': true, 'card-selected': achieve.name === currentAchievement }" *ngFor="let achieve of achievements" (click)="selectAchievement(achieve.name)">
             <img [src]="achieve.image" width="100px">
             <span>{{ achieve.name }}</span>
+            <span class="description">{{ achieve.description }}</span>
         </div>
     </div>
     <div class="dateSpace">
@@ -24,7 +25,10 @@
                 <table class="students">
                     <tr *ngFor="let student of students.g1" (click)="setAchievement(student._id)">
                         <td>{{ student.name }} {{ student.lastName }}</td>
-                        <td style="text-align: end;">
+                        <td *ngIf="!checkAvailability(student._id)">
+                            Estudiante ya reportado
+                        </td>
+                        <td *ngIf="checkAvailability(student._id)" style="text-align: end;">
                             <img [src]="translate2File(achieve)" height="32px" *ngFor="let achieve of student.achievements">
                         </td>
                     </tr>

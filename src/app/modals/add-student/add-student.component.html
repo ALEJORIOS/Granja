@@ -9,32 +9,32 @@
         <label><span>Nombre </span><input type="text" formControlName="name"></label>
         <label><span>Apellido </span><input type="text" formControlName="lastName"></label>
         <label><span>Responsable </span><input type="text" formControlName="parent"></label>
-        <label><span>Contacto </span><input type="text" formControlName="contact"></label>
+        <label><span>Teléfono </span><input type="text" formControlName="contact"></label>
         <label><span>Género</span>
             <div class="gender">
                 <label><input type="radio" name="gender" [value]="'Male'" formControlName="gender">&nbsp;Masculino</label>
-                <label><input type="radio" name="gender" [value]="'Female'" formControlName="gender">&nbsp;Femenino</label>
-            </div>
-        
-        </label>
-        <label><span>Elige</span>
+        <label><input type="radio" name="gender" [value]="'Female'" formControlName="gender">&nbsp;Femenino</label>
+    </div>
+
+    </label>
+    <label><span>Elige</span>
             <div class="opt">
                 <label><input type="radio" name="opt" [value]="true" [(ngModel)]="birthday" [ngModelOptions]="{standalone: true}">&nbsp;Fecha de Nacimiento</label>
-                <label><input type="radio" name="opt" [value]="false" [(ngModel)]="birthday" [ngModelOptions]="{standalone: true}">&nbsp;Grupo Infantil</label>
-            </div>
-        </label>
+    <label><input type="radio" name="opt" [value]="false" [(ngModel)]="birthday" [ngModelOptions]="{standalone: true}">&nbsp;Grupo Infantil</label>
+</div>
+</label>
 
-        <label *ngIf="birthday"><span> Fecha de Nacimiento </span><input type="date" formControlName="birthday"></label>
-        <label *ngIf="!birthday"><span> Grupo</span>
+<label *ngIf="birthday"><span> Fecha de Nacimiento </span><input type="date" formControlName="birthday"></label>
+<label *ngIf="!birthday"><span> Grupo</span>
             <div class="classes">
                 <label>&nbsp;Pequeño Redil<input type="radio" name="group" [value]="'1'" formControlName="group"></label>
-                <label>&nbsp;Simiente Preciosa<input type="radio" name="group" [value]="'2'" formControlName="group"></label>
-                <label>&nbsp;Sembradores<input type="radio" name="group" [value]="'3'" formControlName="group"></label>
-                <label>&nbsp;Cosechadores<input type="radio" name="group" [value]="'4'" formControlName="group"></label>
-            </div>
-        </label>
-        <label *ngIf="edit"><span>Membresía</span><input type="checkbox" formControlName="membership"></label>
-    </div>
+<label>&nbsp;Simiente Preciosa<input type="radio" name="group" [value]="'2'" formControlName="group"></label>
+<label>&nbsp;Sembradores<input type="radio" name="group" [value]="'3'" formControlName="group"></label>
+<label>&nbsp;Cosechadores<input type="radio" name="group" [value]="'4'" formControlName="group"></label>
+</div>
+</label>
+<label *ngIf="edit"><span>Membresía</span><input type="checkbox" formControlName="membership"></label>
+</div>
 </div>
 <div class="modal-footer">
     <i *ngIf="info.show">{{info.msg}}</i>

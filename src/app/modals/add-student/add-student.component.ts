@@ -36,7 +36,8 @@ export class AddStudentComponent implements OnInit {
       birthday: new FormControl(''),
       group: new FormControl("1"),
       membership: new FormControl(false),
-      gender: new FormControl("Male")
+      gender: new FormControl("Male"),
+      points: new FormControl()
   })
 
   constructor(private appService: AppService, private modalService: NgbModal, private groupService: GroupService) {}
@@ -64,6 +65,7 @@ export class AddStudentComponent implements OnInit {
       this.formData.controls.group.setValue(this.data.group);
       this.formData.controls.membership.setValue(this.data.membership);
       this.formData.controls.gender.setValue(this.data.gender);
+      this.formData.controls.points.setValue(this.data.points);
       this.birthday = this.data.opt === "birthday" ? true : false;
     }
   }
@@ -109,8 +111,10 @@ export class AddStudentComponent implements OnInit {
         group: this.formData.controls.group.value,
         opt: this.birthday ? "birthday" : "group",
         gender: this.formData.controls.gender.value,
+        points: 0,
         membership: true
       }
+      console.log('El body es: ', requestBody);
       this.appService.createStudent(requestBody).subscribe({
         next: () => {
           this.modalService.dismissAll('refresh');
@@ -163,6 +167,7 @@ export class AddStudentComponent implements OnInit {
         group: this.formData.controls.group.value,
         opt: this.birthday ? "birthday" : "group",
         membership: this.formData.controls.membership.value,
+        points: this.formData.controls.points.value,
         gender: this.formData.controls.gender.value
       }
       this.appService.editStudent(requestBody).subscribe({

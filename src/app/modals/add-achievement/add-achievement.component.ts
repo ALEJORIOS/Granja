@@ -19,7 +19,8 @@ export class AddAchievementComponent implements OnInit {
   form = new FormGroup({
     name: new FormControl(''),
     value: new FormControl(),
-    icon: new FormControl('')
+    icon: new FormControl(''),
+    description: new FormControl('')
   })
   @Input('edit') edit: boolean = false;
   @Input('data') data: any;
@@ -63,7 +64,8 @@ export class AddAchievementComponent implements OnInit {
     this.achievements.push({
       name: this.form.controls.name.value,
       value: this.form.controls.value.value,
-      image: this.form.controls.icon.value
+      image: this.form.controls.icon.value,
+      description: this.form.controls.description.value
     })
     this.appService.createAchievement({value: this.achievements}).subscribe({
       next: () => {
@@ -76,9 +78,10 @@ export class AddAchievementComponent implements OnInit {
   editAchievement() {
     this.achievements.map((ach: any) => {
       if(ach.name === this.data.name) {
-        ach.name = this.form.controls.name.value,
-        ach.value = this.form.controls.value.value,
-        ach.image = this.form.controls.icon.value
+        ach.name = this.form.controls.name.value;
+        ach.value = this.form.controls.value.value;
+        ach.image = this.form.controls.icon.value;
+        ach.description = this.form.controls.description.value;
       }
     })
 

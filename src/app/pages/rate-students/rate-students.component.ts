@@ -14,6 +14,8 @@ import { AlertComponent } from 'src/app/cmps/alert/alert.component';
 })
 export default class RateStudentsComponent implements OnInit {
 
+  reports: any = [];
+  loadedReport: boolean = false;
   achievements: any[] = [];
   currentAchievement: string = "";
   allStudents: any = [];
@@ -47,6 +49,7 @@ export default class RateStudentsComponent implements OnInit {
   ngOnInit(): void {
     this.getAchievements();
     this.getStudents();
+    this.getReports();
     this.appService.token.subscribe({
       next: (res) => {
         if(res) this.formGroup.controls.teacher.setValue(JSON.parse(window.atob(res.split('.')[1])).id);
@@ -104,10 +107,6 @@ export default class RateStudentsComponent implements OnInit {
     }
   }
 
-  show() {
-    console.log(this.students);
-  }
-
   getStudents() {
     this.appService.getAllStudents().subscribe({
       next: (res) => {
@@ -119,6 +118,38 @@ export default class RateStudentsComponent implements OnInit {
         this.students.g4 = res.filter((stud: any) => stud.group === "4");
       }
     })
+  }
+
+  getReports() {
+    this.appService.getReports().subscribe({
+      next: (res) => {
+        this.reports = res;
+        this.loadedReport = true;
+      },
+      error: (err) => console.error(err)
+    })
+  }
+
+  checkAvailability(id: string):boolean {
+    console.log('Entra aquí')
+    if(this.loadedReport) {
+      if(this.reports.filter((rpt: any) => rpt.date === this.formGroup.controls.date.value).length > 0) {
+        if(this.reports.filter((rpt: any) => rpt.date === this.formGroup.controls.date.value)[0].achievements.some((ach: any) => {
+          console.log('epa: ', ach.students.some((std: any) => std._id === id));
+          return ach.students.some((std: any) => std._id === id);
+        })) {
+          console.log('Es falso')
+          return false
+        }else{
+          console.log('Es verdadero1');
+          return true;
+        }
+      }else{
+        return true;
+      }
+    }else{
+      return true;
+    }
   }
 
   translate2File(name: string): String {
