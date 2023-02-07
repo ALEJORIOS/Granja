@@ -17,7 +17,8 @@ export class AddStudentComponent implements OnInit {
   
   @Input('edit') edit: boolean = false;
   @Input('data') data?: any;
-  teachers: any =[];
+  admin: boolean = false;
+  teachers: any = [];
   birthday: boolean = true;
   alert: any = {
     type: "error",
@@ -45,6 +46,13 @@ export class AddStudentComponent implements OnInit {
   constructor(private appService: AppService, private modalService: NgbModal, private groupService: GroupService) {}
   
   ngOnInit(): void {
+    this.appService.token.subscribe({
+      next: (res) => {
+        if(res) {
+          this.admin = JSON.parse(window.atob(res.split('.')[1])).role === "Admin" ? true : false;
+        }
+      }
+    })
     this.getTeachers();
     this.groupService.getAges();
     this.groupService.agesLoad.subscribe({

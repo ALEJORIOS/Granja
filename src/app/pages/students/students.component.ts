@@ -1,18 +1,24 @@
 import { AppService } from './../../services/app.service';
 import { Component, OnInit } from '@angular/core';
-import { NgbAccordionModule, NgbActiveModal, NgbModal, NgbModalModule, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
+import { NgbAccordionModule, NgbModal, NgbModalModule, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
 import { CommonModule } from '@angular/common';
 import { AddStudentComponent } from 'src/app/modals/add-student/add-student.component';
 import { TrueFalsePipe } from 'src/app/pipes/true-false.pipe';
 import { DeleteConfirmationComponent } from 'src/app/modals/delete-confirmation/delete-confirmation.component';
 import { SummaryComponent } from 'src/app/modals/summary/summary.component';
+import { LOCALE_ID } from '@angular/core';
+import localeEs from '@angular/common/locales/es';
+import { registerLocaleData } from '@angular/common';
+
+registerLocaleData(localeEs, 'es');
 
 @Component({
   standalone: true,
   selector: 'app-students',
   templateUrl: './students.component.html',
   styleUrls: ['./students.component.scss'],
-  imports: [NgbAccordionModule, CommonModule, NgbModalModule, TrueFalsePipe]
+  imports: [NgbAccordionModule, CommonModule, NgbModalModule, TrueFalsePipe],
+  providers: [{provide: LOCALE_ID, useValue: 'es'}]
 })
 export default class StudentsComponent implements OnInit {
 

@@ -4,13 +4,19 @@ import { AppService } from 'src/app/services/app.service';
 import { NgbModal, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
 import { AddTeacherComponent } from 'src/app/modals/add-teacher/add-teacher.component';
 import { DeleteConfirmationComponent } from 'src/app/modals/delete-confirmation/delete-confirmation.component';
+import { LOCALE_ID } from '@angular/core';
+import localeEs from '@angular/common/locales/es';
+import { registerLocaleData } from '@angular/common';
+
+registerLocaleData(localeEs, 'es');
 
 @Component({
   selector: 'app-admin-teachers',
   standalone: true,
   imports: [CommonModule],
   templateUrl: './admin-teachers.component.html',
-  styleUrls: ['./admin-teachers.component.scss']
+  styleUrls: ['./admin-teachers.component.scss'],
+  providers: [{provide: LOCALE_ID, useValue: 'es'}]
 })
 export class AdminTeachersComponent implements OnInit {
 

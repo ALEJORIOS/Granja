@@ -15,6 +15,7 @@
                 <option *ngFor="let teacher of teachers" [value]="teacher._id">{{ teacher.name }} {{ teacher.lastName }}</option>
             </select>
         </label>
+        <label *ngIf="admin"><span>Talentos </span><input type="number" formControlName="points"></label>
         <label><span>Género</span>
             <div class="gender">
                 <label><input type="radio" name="gender" [value]="'Male'" formControlName="gender">&nbsp;Masculino</label>

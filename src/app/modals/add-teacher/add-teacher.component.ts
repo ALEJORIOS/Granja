@@ -75,7 +75,7 @@ export class AddTeacherComponent implements OnInit {
     }
     if(error === false) {
       this.alert.show = false;
-      this.info.msg = "Creando Estudiante..."
+      this.info.msg = "Creando Maestro..."
       this.info.show = true;
       const requestBody: any = {
         name: this.formData.controls.name.value,

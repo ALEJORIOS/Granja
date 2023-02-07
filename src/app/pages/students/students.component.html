@@ -14,16 +14,17 @@
                 <th noWrap>Apellidos</th>
                 <th noWrap>Miembro</th>
                 <th noWrap>Responsable</th>
-                <th noWrap>Contacto</th>
+                <th noWrap>Teléfono</th>
                 <th noWrap>Fecha de Nacimiento</th>
                 <th noWrap>Talentos</th>
+                <th noWrap>Editar</th>
                 <th noWrap>Eliminar</th>
             </thead>
             <tbody>
                 <tr class="group1">
                     <td colspan="100">Pequeño Redil</td>
                 </tr>
-                <tr *ngFor="let student of groupOne" class="sg1" (dblclick)="editModal(student)">
+                <tr *ngFor="let student of groupOne" class="sg1">
                     <td noWrap>{{ student.name }}</td>
                     <td noWrap>{{ student.lastName }}</td>
                     <td noWrap>{{ student.membership | trueFalse }}</td>
@@ -31,12 +32,13 @@
                     <td noWrap>{{ student.contact }}</td>
                     <td noWrap>{{ student.birthday | date: 'longDate' }}</td>
                     <td noWrap>{{ student.points }}</td>
+                    <td noWrap><button class="delete" (click)="editModal(student)">Editar</button></td>
                     <td noWrap><button class="delete" (click)="openDelete(student)">Eliminar</button></td>
                 </tr>
                 <tr class="group2">
                     <td colspan="100">Simiente Preciosa</td>
                 </tr>
-                <tr *ngFor="let student of groupTwo" class="sg2" (dblclick)="editModal(student)">
+                <tr *ngFor="let student of groupTwo" class="sg2">
                     <td noWrap>{{ student.name }}</td>
                     <td noWrap>{{ student.lastName }}</td>
                     <td noWrap>{{ student.membership | trueFalse }}</td>
@@ -44,12 +46,13 @@
                     <td noWrap>{{ student.contact }}</td>
                     <td noWrap>{{ student.birthday | date: 'longDate' }}</td>
                     <td noWrap>{{ student.points }}</td>
+                    <td noWrap><button class="delete" (click)="editModal(student)">Editar</button></td>
                     <td noWrap><button class="delete" (click)="openDelete(student)">Eliminar</button></td>
                 </tr>
                 <tr class="group3">
                     <td colspan="100">Sembradores</td>
                 </tr>
-                <tr *ngFor="let student of groupThree" class="sg3" (dblclick)="editModal(student)">
+                <tr *ngFor="let student of groupThree" class="sg3">
                     <td noWrap>{{ student.name }}</td>
                     <td noWrap>{{ student.lastName }}</td>
                     <td noWrap>{{ student.membership | trueFalse }}</td>
@@ -57,12 +60,13 @@
                     <td noWrap>{{ student.contact }}</td>
                     <td noWrap>{{ student.birthday | date: 'longDate' }}</td>
                     <td noWrap>{{ student.points }}</td>
+                    <td noWrap><button class="delete" (click)="editModal(student)">Editar</button></td>
                     <td noWrap><button class="delete" (click)="openDelete(student)">Eliminar</button></td>
                 </tr>
                 <tr class="group4">
                     <td colspan="100">Cosechadores</td>
                 </tr>
-                <tr *ngFor="let student of groupFour" class="sg4" (dblclick)="editModal(student)">
+                <tr *ngFor="let student of groupFour" class="sg4">
                     <td noWrap>{{ student.name }}</td>
                     <td noWrap>{{ student.lastName }}</td>
                     <td noWrap>{{ student.membership | trueFalse }}</td>
@@ -70,6 +74,7 @@
                     <td noWrap>{{ student.contact }}</td>
                     <td noWrap>{{ student.birthday | date: 'longDate' }}</td>
                     <td noWrap>{{ student.points }}</td>
+                    <td noWrap><button class="delete" (click)="editModal(student)">Editar</button></td>
                     <td noWrap><button class="delete" (click)="openDelete(student)">Eliminar</button></td>
                 </tr>
             </tbody>
