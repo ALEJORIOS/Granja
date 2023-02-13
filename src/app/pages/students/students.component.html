@@ -18,7 +18,7 @@
                 <th noWrap>Fecha de Nacimiento</th>
                 <th noWrap>Talentos</th>
                 <th noWrap>Editar</th>
-                <th noWrap>Eliminar</th>
+                <th noWrap *ngIf="admin">Eliminar</th>
             </thead>
             <tbody>
                 <tr class="group1">
@@ -32,8 +32,9 @@
                     <td noWrap>{{ student.contact }}</td>
                     <td noWrap>{{ student.birthday | date: 'longDate' }}</td>
                     <td noWrap>{{ student.points }}</td>
-                    <td noWrap><button class="delete" (click)="editModal(student)">Editar</button></td>
-                    <td noWrap><button class="delete" (click)="openDelete(student)">Eliminar</button></td>
+                    <td noWrap *ngIf="checkHedge(student)"><button class="delete" (click)="editModal(student)">Editar</button></td>
+                    <td noWrap *ngIf="!checkHedge(student)"></td>
+                    <td noWrap *ngIf="admin"><button class="delete" (click)="openDelete(student)">Eliminar</button></td>
                 </tr>
                 <tr class="group2">
                     <td colspan="100">Simiente Preciosa</td>
@@ -46,8 +47,9 @@
                     <td noWrap>{{ student.contact }}</td>
                     <td noWrap>{{ student.birthday | date: 'longDate' }}</td>
                     <td noWrap>{{ student.points }}</td>
-                    <td noWrap><button class="delete" (click)="editModal(student)">Editar</button></td>
-                    <td noWrap><button class="delete" (click)="openDelete(student)">Eliminar</button></td>
+                    <td noWrap *ngIf="checkHedge(student)"><button class="delete" (click)="editModal(student)">Editar</button></td>
+                    <td noWrap *ngIf="!checkHedge(student)"></td>
+                    <td noWrap *ngIf="admin"><button class="delete" (click)="openDelete(student)">Eliminar</button></td>
                 </tr>
                 <tr class="group3">
                     <td colspan="100">Sembradores</td>
@@ -60,8 +62,9 @@
                     <td noWrap>{{ student.contact }}</td>
                     <td noWrap>{{ student.birthday | date: 'longDate' }}</td>
                     <td noWrap>{{ student.points }}</td>
-                    <td noWrap><button class="delete" (click)="editModal(student)">Editar</button></td>
-                    <td noWrap><button class="delete" (click)="openDelete(student)">Eliminar</button></td>
+                    <td noWrap *ngIf="checkHedge(student)"><button class="delete" (click)="editModal(student)">Editar</button></td>
+                    <td noWrap *ngIf="!checkHedge(student)"></td>
+                    <td noWrap *ngIf="admin"><button class="delete" (click)="openDelete(student)">Eliminar</button></td>
                 </tr>
                 <tr class="group4">
                     <td colspan="100">Cosechadores</td>
@@ -74,8 +77,9 @@
                     <td noWrap>{{ student.contact }}</td>
                     <td noWrap>{{ student.birthday | date: 'longDate' }}</td>
                     <td noWrap>{{ student.points }}</td>
-                    <td noWrap><button class="delete" (click)="editModal(student)">Editar</button></td>
-                    <td noWrap><button class="delete" (click)="openDelete(student)">Eliminar</button></td>
+                    <td noWrap *ngIf="checkHedge(student)"><button class="delete" (click)="editModal(student)">Editar</button></td>
+                    <td noWrap *ngIf="!checkHedge(student)"></td>
+                    <td noWrap *ngIf="admin"><button class="delete" (click)="openDelete(student)">Eliminar</button></td>
                 </tr>
             </tbody>
         </table>

@@ -26,12 +26,35 @@ export default class StudentsComponent implements OnInit {
   groupTwo: any[] = [];
   groupThree: any[] = [];
   groupFour: any[] = [];
+  admin: boolean = false;
+  teacherId: string = "";
 
   constructor(private appService: AppService, private modalService: NgbModal) {}
 
   ngOnInit(): void {
     this.getData();
+    this.appService.token.subscribe({
+      next: (res) => {
+        if(res) {
+          this.teacherId = JSON.parse(window.atob(res.split('.')[1])).id;
+          if(JSON.parse(window.atob(res.split('.')[1])).role === "Admin") this.admin = true;
+        }
+      }
+    })
   }
+
+  checkHedge(student: any): boolean {
+    if(this.admin) {
+      return true;
+    }else{
+      if(student.hedge === this.teacherId) {
+        return true;
+      }else{
+        return false;
+      }
+    }
+  }
+
 
   getData(): void{
     this.appService.getAllStudents().subscribe({
@@ -74,6 +97,6 @@ export default class StudentsComponent implements OnInit {
   }
 
   openSummary() {
-    const summary = this.modalService.open(SummaryComponent);
+    this.modalService.open(SummaryComponent);
   }
 }

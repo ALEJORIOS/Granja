@@ -4,13 +4,15 @@
             <img [src]="achieve.image" width="100px">
             <span>{{ achieve.name }}</span>
             <span class="description">{{ achieve.description }}</span>
+            <span class="description" *ngIf="achieve.value !== 1">+{{ achieve.value }} Talentos</span>
+            <span class="description" *ngIf="achieve.value === 1">+{{ achieve.value }} Talento</span>
         </div>
     </div>
     <div class="dateSpace">
-        <input class="date" type="date" formControlName="date">
+        <input class="date" type="date" formControlName="date" (change)="checkDay()">
         <select formControlName="service">
             <option [value]="'first'">Primer Culto</option>
-            <option [value]="'second'">Segundo Culto</option>
+            <option *ngIf="enableSecondService" [value]="'second'">Segundo Culto</option>
         </select>
     </div>
     <ngb-accordion class="accordeon">
@@ -28,9 +30,11 @@
                         <td *ngIf="!checkAvailability(student._id)">
                             Estudiante ya reportado
                         </td>
-                        <td *ngIf="checkAvailability(student._id)" style="text-align: end;">
+                        <td *ngIf="checkAvailability(student._id)"style="text-align: right;">
                             <img [src]="translate2File(achieve)" height="32px" *ngFor="let achieve of student.achievements">
                         </td>
+                        <td *ngIf="student.achievements.length !== 0" style="text-align: right"><span class="transform">| {{ student.points }}<i class="bi bi-arrow-right-short"></i>{{ student.preview }}</span></td>
+                        <td *ngIf="student.achievements.length === 0" style="text-align: right"></td>
                     </tr>
                 </table>
             </ng-template>
@@ -49,6 +53,8 @@
                         <td style="text-align: end;">
                             <img [src]="translate2File(achieve)" height="32px" *ngFor="let achieve of student.achievements">
                         </td>
+                        <td *ngIf="student.achievements.length !== 0" style="text-align: right"><span class="transform">| {{ student.points }}<i class="bi bi-arrow-right-short"></i>{{ student.preview }}</span></td>
+                        <td *ngIf="student.achievements.length === 0" style="text-align: right"></td>
                     </tr>
                 </table>
             </ng-template>
@@ -67,6 +73,8 @@
                         <td style="text-align: end;">
                             <img [src]="translate2File(achieve)" height="32px" *ngFor="let achieve of student.achievements">
                         </td>
+                        <td *ngIf="student.achievements.length !== 0" style="text-align: right"><span class="transform">| {{ student.points }}<i class="bi bi-arrow-right-short"></i>{{ student.preview }}</span></td>
+                        <td *ngIf="student.achievements.length === 0" style="text-align: right"></td>
                     </tr>
                 </table>
             </ng-template>
@@ -85,6 +93,8 @@
                         <td style="text-align: end;">
                             <img [src]="translate2File(achieve)" height="32px" *ngFor="let achieve of student.achievements">
                         </td>
+                        <td *ngIf="student.achievements.length !== 0" style="text-align: right"><span class="transform">| {{ student.points }}<i class="bi bi-arrow-right-short"></i>{{ student.preview }}</span></td>
+                        <td *ngIf="student.achievements.length === 0" style="text-align: right"></td>
                     </tr>
                 </table>
             </ng-template>

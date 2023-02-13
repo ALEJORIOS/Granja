@@ -14,7 +14,6 @@ const routes: Routes = [
   {path: "", redirectTo: "auth/login", pathMatch: "full"},
   {path: "setting", loadComponent: () => import('./pages/setting/setting.component')},
   {path: "**", loadComponent: () => import('./pages/not-found/not-found.component')},
-
 ];
 
 @NgModule({

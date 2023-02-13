@@ -1,8 +1,12 @@
 <div class="rate" [formGroup]="formGroup">
+    
     <div class="achieves">
         <div [ngClass]="{'achieve-card': true, 'card-selected': achieve.name === currentAchievement }" *ngFor="let achieve of achievements" (click)="selectAchievement(achieve.name)">
             <img [src]="achieve.image" width="100px">
             <span>{{ achieve.name }}</span>
+            <span class="description">{{ achieve.description }}</span>
+            <span class="description" *ngIf="achieve.value !== 1">+{{ achieve.value }} Talentos</span>
+            <span class="description" *ngIf="achieve.value === 1">+{{ achieve.value }} Talento</span>
         </div>
     </div>
     <div class="dateSpace">
@@ -13,8 +17,9 @@
         </select>
     </div>
     <span style="margin-bottom: 1em;"><strong>{{ translateTeacher(report?.teacher)[0] }}:</strong> {{ translateTeacher(report?.teacher)[1] }}</span>
+    <i *ngIf="loadingElemsTotal">Cargando reporte...</i>
     <ngb-accordion class="accordeon">
-        <ngb-panel>
+        <ngb-panel [disabled]="loadingElemsTotal">
             <ng-template ngbPanelHeader let-opened="opened">
                 <div class="tab-header">
                     <button class="tab-button" ngbPanelToggle>Pequeño Redil</button>
@@ -28,11 +33,13 @@
                         <td style="text-align: end;">
                             <img [src]="translate2File(achieve)" height="32px" *ngFor="let achieve of student.achievements">
                         </td>
+                        <td *ngIf="student.achievements.length !== 0" style="text-align: right"><span class="transform">| {{ student.points }}<i class="bi bi-arrow-right-short"></i>{{ student.preview }}</span></td>
+                        <td *ngIf="student.achievements.length === 0" style="text-align: right"></td>
                     </tr>
                 </table>
             </ng-template>
         </ngb-panel>
-        <ngb-panel>
+        <ngb-panel [disabled]="loadingElemsTotal">
             <ng-template ngbPanelHeader let-opened="opened">
                 <div class="tab-header">
                     <button class="tab-button" ngbPanelToggle>Simiente Preciosa</button>
@@ -46,11 +53,13 @@
                         <td style="text-align: end;">
                             <img [src]="translate2File(achieve)" height="32px" *ngFor="let achieve of student.achievements">
                         </td>
+                        <td *ngIf="student.achievements.length !== 0" style="text-align: right"><span class="transform">| {{ student.points }}<i class="bi bi-arrow-right-short"></i>{{ student.preview }}</span></td>
+                        <td *ngIf="student.achievements.length === 0" style="text-align: right"></td>
                     </tr>
                 </table>
             </ng-template>
         </ngb-panel>
-        <ngb-panel>
+        <ngb-panel [disabled]="loadingElemsTotal">
             <ng-template ngbPanelHeader let-opened="opened">
                 <div class="tab-header">
                     <button class="tab-button" ngbPanelToggle>Sembradores</button>
@@ -64,11 +73,13 @@
                         <td style="text-align: end;">
                             <img [src]="translate2File(achieve)" height="32px" *ngFor="let achieve of student.achievements">
                         </td>
+                        <td *ngIf="student.achievements.length !== 0" style="text-align: right"><span class="transform">| {{ student.points }}<i class="bi bi-arrow-right-short"></i>{{ student.preview }}</span></td>
+                        <td *ngIf="student.achievements.length === 0" style="text-align: right"></td>
                     </tr>
                 </table>
             </ng-template>
         </ngb-panel>
-        <ngb-panel>
+        <ngb-panel [disabled]="loadingElemsTotal">
             <ng-template ngbPanelHeader let-opened="opened">
                 <div class="tab-header">
                     <button class="tab-button" ngbPanelToggle>Cosechadores</button>
@@ -82,6 +93,8 @@
                         <td style="text-align: end;">
                             <img [src]="translate2File(achieve)" height="32px" *ngFor="let achieve of student.achievements">
                         </td>
+                        <td *ngIf="student.achievements.length !== 0" style="text-align: right"><span class="transform">| {{ student.points }}<i class="bi bi-arrow-right-short"></i>{{ student.preview }}</span></td>
+                        <td *ngIf="student.achievements.length === 0" style="text-align: right"></td>
                     </tr>
                 </table>
             </ng-template>

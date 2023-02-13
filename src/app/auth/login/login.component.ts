@@ -4,7 +4,6 @@ import { Router } from '@angular/router';
 import { Component } from '@angular/core';
 import { AlertComponent } from 'src/app/cmps/alert/alert.component';
 import { CommonModule } from '@angular/common';
-import { first } from 'rxjs';
 
 @Component({
   standalone: true,

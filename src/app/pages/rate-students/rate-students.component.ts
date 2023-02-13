@@ -23,6 +23,7 @@ export default class RateStudentsComponent implements OnInit {
   allTeachers: any = [];
   students: any = {};
   enableSave: boolean = false;
+  enableSecondService: boolean = false;
   alert: any = {
     type: "error",
     show: false,
@@ -48,6 +49,7 @@ export default class RateStudentsComponent implements OnInit {
   constructor(private appService: AppService) {}
 
   ngOnInit(): void {
+    this.checkDay();
     this.getAchievements();
     this.getStudents();
     this.getReports();
@@ -99,8 +101,10 @@ export default class RateStudentsComponent implements OnInit {
       let group = "g"+this.allStudents.filter((std: any) => std._id === studentId)[0].group;
       if(this.allStudents.filter((std: any) => std._id === studentId)[0].achievements.includes(this.currentAchievement)) {
         this.allStudents.filter((std: any) => std._id === studentId)[0].achievements = this.allStudents.filter((std: any) => std._id === studentId)[0].achievements.filter((ach: string) => ach !== this.currentAchievement);
+        this.previewPoints();
       }else{
         this.allStudents.filter((std: any) => std._id === studentId)[0].achievements.push(this.currentAchievement);
+        this.previewPoints();
       }
       if(this.currentAchievement && this.students[group].every((std: any) => std.achievements.includes(this.currentAchievement))) {
         this.selectAllName[group] = "Deseleccionar Todos";
@@ -108,10 +112,6 @@ export default class RateStudentsComponent implements OnInit {
         this.selectAllName[group] = "Seleccionar Todos";
       }
     }
-  }
-
-  show() {
-    console.log('Estudiantes: ', this.allStudents);
   }
 
   getStudents() {
@@ -239,9 +239,9 @@ export default class RateStudentsComponent implements OnInit {
     let requestBody: any = {rate: []};
     this.allStudents.map((std: any) => {
       const achievePoints: number = std.achievements.reduce((acc: number, ach: string) => {
-        return acc = acc +  this.achievements.filter((achieve: any) => achieve.name === ach)[0].value;
-      }, 0);
-      std.points = std.points + achievePoints;
+        return acc = acc +  this.achievements.filter((achieve: any) => achieve.name === ach)[0]?.value;
+      }, std.points);
+      std.points = achievePoints;
     })
     this.allStudents.forEach((std: any) => {
       requestBody.rate.push({id: std._id, points: std.points});
@@ -262,5 +262,23 @@ export default class RateStudentsComponent implements OnInit {
         this.info.show = false;
       }
     })
+  }
+
+  previewPoints() {
+    this.allStudents.map((std: any) => {
+      const achievePoints: number = std.achievements.reduce((acc: number, ach: string) => {
+        return acc = acc +  this.achievements.filter((achieve: any) => achieve.name === ach)[0]?.value;
+      }, std.points);
+      std.preview = achievePoints;
+    })
+  }
+
+  checkDay() {
+    if(new Date(this.formGroup.controls.date.value || "").getDay() !== 4) {
+      this.enableSecondService = true;
+    }else{
+      this.enableSecondService = false;
+      this.formGroup.controls.service.setValue('first');
+    }
   }
 }
