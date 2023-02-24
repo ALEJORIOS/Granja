@@ -140,18 +140,22 @@ export default class RateStudentsComponent implements OnInit {
   checkAvailability(id: string): boolean {
     if(this.loadedReport) {
       if(this.reports.filter((rpt: any) => rpt.date === this.formGroup.controls.date.value).length > 0) {
-        if(this.reports.filter((rpt: any) => rpt.date === this.formGroup.controls.date.value)[0].achievements.some((ach: any) => {
-          return ach.students.some((std: any) => std._id === id);
-        })) {
-          this.allStudents.map((std: any) => {
-            if(std._id === id) {
-              std.achievements = [];
-            }
-          })
-          return false;
+        if(this.reports.filter((rpt: any) => rpt.date === this.formGroup.controls.date.value).length === 1 && this.reports.filter((rpt: any) => rpt.date === this.formGroup.controls.date.value)[0].service === this.formGroup.controls.service.value) {
+          if(this.reports.filter((rpt: any) => rpt.date === this.formGroup.controls.date.value)[0].achievements.some((ach: any) => {
+            return ach.students.some((std: any) => std._id === id);
+          })) {
+            this.allStudents.map((std: any) => {
+              if(std._id === id) {
+                std.achievements = [];
+              }
+            })
+            return false;
+          }else{
+            return true;
+          } 
         }else{
-          return true;
-        } 
+          return false;
+        }
       }else{
         return true;
       }
