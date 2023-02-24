@@ -72,9 +72,6 @@
             }
             .group4 {
                 @include groupN(#7209b7);
-                td {
-                    border-radius: 0 0 1em 1em;
-                }
             }
             .sg1 {
                 @include students(#d904290a);

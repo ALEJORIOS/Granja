@@ -141,6 +141,7 @@ export default class RateStudentsComponent implements OnInit {
     if(this.loadedReport) {
       if(this.reports.filter((rpt: any) => rpt.date === this.formGroup.controls.date.value).length > 0) {
         if(this.reports.filter((rpt: any) => rpt.date === this.formGroup.controls.date.value).length === 1 && this.reports.filter((rpt: any) => rpt.date === this.formGroup.controls.date.value)[0].service === this.formGroup.controls.service.value) {
+          console.log('Entra mal aquí')
           if(this.reports.filter((rpt: any) => rpt.date === this.formGroup.controls.date.value)[0].achievements.some((ach: any) => {
             return ach.students.some((std: any) => std._id === id);
           })) {
@@ -154,7 +155,15 @@ export default class RateStudentsComponent implements OnInit {
             return true;
           } 
         }else{
-          return false;
+          if(this.reports.filter((rpt: any) => rpt.date === this.formGroup.controls.date.value).length > 1) {
+            return false;
+          }else{
+            if(this.reports.filter((rpt: any) => rpt.date === this.formGroup.controls.date.value)[0].service === this.formGroup.controls.service.value) {
+              return false;
+            }else{
+              return true;
+            }
+          }
         }
       }else{
         return true;
