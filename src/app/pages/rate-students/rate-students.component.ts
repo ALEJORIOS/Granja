@@ -64,6 +64,7 @@ export default class RateStudentsComponent implements OnInit {
     this.appService.getAchievements().subscribe({
       next: (res) => {
         this.achievements = res;
+        this.achievements.sort((a, b) => a.order - b.order);
         this.enableSave = true;
       },
     })
