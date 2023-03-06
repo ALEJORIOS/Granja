@@ -97,19 +97,21 @@ export default class RateStudentsComponent implements OnInit {
   }
 
   setAchievement(studentId: string) {
-    if(this.checkAvailability(studentId) === true) {
-      let group = "g"+this.allStudents.filter((std: any) => std._id === studentId)[0].group;
-      if(this.allStudents.filter((std: any) => std._id === studentId)[0].achievements.includes(this.currentAchievement)) {
-        this.allStudents.filter((std: any) => std._id === studentId)[0].achievements = this.allStudents.filter((std: any) => std._id === studentId)[0].achievements.filter((ach: string) => ach !== this.currentAchievement);
-        this.previewPoints();
-      }else{
-        this.allStudents.filter((std: any) => std._id === studentId)[0].achievements.push(this.currentAchievement);
-        this.previewPoints();
-      }
-      if(this.currentAchievement && this.students[group].every((std: any) => std.achievements.includes(this.currentAchievement))) {
-        this.selectAllName[group] = "Deseleccionar Todos";
-      }else{
-        this.selectAllName[group] = "Seleccionar Todos";
+    if(this.currentAchievement) {
+      if(this.checkAvailability(studentId) === true) {
+        let group = "g"+this.allStudents.filter((std: any) => std._id === studentId)[0].group;
+        if(this.allStudents.filter((std: any) => std._id === studentId)[0].achievements.includes(this.currentAchievement)) {
+          this.allStudents.filter((std: any) => std._id === studentId)[0].achievements = this.allStudents.filter((std: any) => std._id === studentId)[0].achievements.filter((ach: string) => ach !== this.currentAchievement);
+          this.previewPoints();
+        }else{
+          this.allStudents.filter((std: any) => std._id === studentId)[0].achievements.push(this.currentAchievement);
+          this.previewPoints();
+        }
+        if(this.currentAchievement && this.students[group].every((std: any) => std.achievements.includes(this.currentAchievement))) {
+          this.selectAllName[group] = "Deseleccionar Todos";
+        }else{
+          this.selectAllName[group] = "Seleccionar Todos";
+        }
       }
     }
   }
