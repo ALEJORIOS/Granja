@@ -1,10 +1,11 @@
 import { AppService } from 'src/app/services/app.service';
-import { NgbAccordionModule } from '@ng-bootstrap/ng-bootstrap';
+import { NgbAccordionModule, NgbModal, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { AlertComponent } from 'src/app/cmps/alert/alert.component';
 import { ThisReceiver } from '@angular/compiler';
+import { AddStudentComponent } from 'src/app/modals/add-student/add-student.component';
 
 @Component({
   selector: 'app-rate-students',
@@ -23,6 +24,7 @@ export default class RateStudentsComponent implements OnInit {
   allTeachers: any = [];
   students: any = {};
   enableSave: boolean = false;
+  enableAdd: boolean = true;
   enableSecondService: boolean = false;
   alert: any = {
     type: "error",
@@ -46,7 +48,7 @@ export default class RateStudentsComponent implements OnInit {
     teacher: new FormControl('')
   })
 
-  constructor(private appService: AppService) {}
+  constructor(private appService: AppService, private modalService: NgbModal) {}
 
   ngOnInit(): void {
     this.checkDay();
@@ -223,6 +225,15 @@ export default class RateStudentsComponent implements OnInit {
         error: (err) => console.error(err)
       })
     }
+  }
+
+  addStudent() {
+    const addModal: NgbModalRef = this.modalService.open(AddStudentComponent, { size: 'xl' });
+    addModal.componentInstance.edit = false;
+    addModal.result.then((result) => {},
+    (reason) => {
+      if(reason === "refresh") this.getStudents();
+    });
   }
 
   uploadReport() {

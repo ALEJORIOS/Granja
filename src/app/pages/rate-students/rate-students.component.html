@@ -30,7 +30,7 @@
                         <td *ngIf="!checkAvailability(student._id)">
                             Estudiante ya reportado
                         </td>
-                        <td *ngIf="checkAvailability(student._id)"style="text-align: right;">
+                        <td *ngIf="checkAvailability(student._id)" style="text-align: right;">
                             <img [src]="translate2File(achieve)" height="32px" *ngFor="let achieve of student.achievements">
                         </td>
                         <td *ngIf="student.achievements.length !== 0" style="text-align: right"><span class="transform">| {{ student.points }}<i class="bi bi-arrow-right-short"></i>{{ student.preview }}</span></td>
@@ -102,5 +102,6 @@
     </ngb-accordion>
     <alert *ngIf="alert.show" [type]="alert.type">{{ alert.msg }}</alert>
     <button class="save" [disabled]="!enableSave" (click)="save()">Guardar</button>
+    <button class="save" [disabled]="!enableAdd" (click)="addStudent()">Agregar Estudiante</button>
     <i *ngIf="info.show">{{ info.msg }}</i>
 </div>
