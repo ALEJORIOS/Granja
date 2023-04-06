@@ -40,7 +40,7 @@ export default class RateStudentsComponent implements OnInit {
     g2: "Seleccionar Todos",
     g3: "Seleccionar Todos",
     g4: "Seleccionar Todos"
-  }
+  } 
 
   formGroup = new FormGroup({
     date: new FormControl(''),
@@ -85,17 +85,19 @@ export default class RateStudentsComponent implements OnInit {
 
 
   selectAll(group: string) {
-    if(this.students[group].every((std: any) => std.achievements.includes(this.currentAchievement))) {
-      this.students[group].map((std: any) => {
-        std.achievements = std.achievements.filter((ach: string) => ach !== this.currentAchievement);
-      })
-    }else{
-      this.students[group].filter((std: any) => !std.achievements.includes(this.currentAchievement)).map((std: any) => std.achievements.push(this.currentAchievement));
-    }
-    if(this.currentAchievement && this.students[group].every((std: any) => std.achievements.includes(this.currentAchievement))) {
-      this.selectAllName[group] = "Deseleccionar Todos";
-    }else{
-      this.selectAllName[group] = "Seleccionar Todos";
+    if(this.currentAchievement) {
+      if(this.students[group].every((std: any) => std.achievements.includes(this.currentAchievement))) {
+        this.students[group].map((std: any) => {
+          std.achievements = std.achievements.filter((ach: string) => ach !== this.currentAchievement);
+        })
+      }else{
+        this.students[group].filter((std: any) => !std.achievements.includes(this.currentAchievement)).map((std: any) => std.achievements.push(this.currentAchievement));
+      }
+      if(this.currentAchievement && this.students[group].every((std: any) => std.achievements.includes(this.currentAchievement))) {
+        this.selectAllName[group] = "Deseleccionar Todos";
+      }else{
+        this.selectAllName[group] = "Seleccionar Todos";
+      }
     }
   }
 
@@ -237,8 +239,13 @@ export default class RateStudentsComponent implements OnInit {
   }
 
   uploadReport() {
+    this.info.msg = "Verificando Talentos..."
+    this.info.show = true;
+    if(this.allStudents.every((std: any) => std.achievements.length === 0)) {
+      this.info.msg = "No se ha calificado";
+      this.enableSave = true;
+    }else {
       this.info.msg = "Subiendo Reporte...";
-      this.info.show = true;
       this.achievements.map((ach: any) => {
         ach.students = this.allStudents.filter((std: any) => std.achievements.includes(ach.name));
       });
@@ -260,6 +267,7 @@ export default class RateStudentsComponent implements OnInit {
           this.alert.show = true;
         }
       })
+    }
   }
 
   rateStudents() {
