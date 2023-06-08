@@ -103,4 +103,8 @@ export class AppService {
   deleteReport(id: string) {
     return this.httpClient.delete<any>(`${url}/delete-report`, {params: {id}});
   }
+
+  resetPoints() {
+    return this.httpClient.put<any>(`${url}/reset`, {});
+  }
 }

@@ -6,6 +6,9 @@
         <button class="addStudent" (click)="openSummary()">
             Resumen
         </button>
+        <button *ngIf="admin" class="addStudent" (click)="resetAll()">
+            Reset
+        </button>
     </div>
     <div class="table">
         <table>

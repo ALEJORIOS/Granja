@@ -67,6 +67,12 @@ export default class StudentsComponent implements OnInit {
     })
   }
 
+  resetAll() {
+    this.appService.resetPoints().subscribe({
+      complete: () => this.getData()
+    });
+  }
+
   addModal() {
     const addModal: NgbModalRef = this.modalService.open(AddStudentComponent, { size: 'xl' });
     addModal.componentInstance.edit = false;

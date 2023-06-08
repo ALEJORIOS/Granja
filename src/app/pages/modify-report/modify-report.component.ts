@@ -292,6 +292,7 @@ export default class ModifyReportComponent {
   }
 
   deletePoints() {
+    console.log('Hola ya entré');
     this.allStudents.map((std: any) => {
       const achievePoints: number = std.achievements.reduce((acc: number, ach: string) => {
         return acc = acc - this.achievements.filter((achieve: any) => achieve.name === ach)[0]?.value;

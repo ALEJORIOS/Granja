@@ -253,7 +253,8 @@ export default class RateStudentsComponent implements OnInit {
         date: this.formGroup.controls.date.value,
         service: this.formGroup.controls.service.value,
         teacher: this.formGroup.controls.teacher.value,
-        achievements: this.achievements
+        achievements: this.achievements,
+        lastRecord: this.allStudents.map((student: any) => student.name + ' ' + student.lastName + ': ' + student.points)
       }
   
       this.appService.createReport(requestBody).subscribe({
