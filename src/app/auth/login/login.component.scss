@@ -6,6 +6,7 @@
     align-items: center;
     .loginBox {
         display: grid;
+        justify-content: center;
         grid-template-rows: auto auto;
         width: 20rem;
         box-shadow: 0 2px 6px 4px #F0F0F0;
@@ -48,6 +49,11 @@
                     background-color: #2A479C50;
                 }
             }
+        }
+        blockquote {
+            text-align: center;
+            color: #A0A0A0;
+            font-size: 12px;
         }
     }
 }
