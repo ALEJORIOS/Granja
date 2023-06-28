@@ -272,19 +272,18 @@ export default class ModifyReportComponent {
   }
 
   deleteReport() {
-    this.appService.deleteReport(this.reportID).subscribe({
+    const requestBody: any = {rate: []};
+    this.report.lastRecord.forEach((std: any) => {
+      requestBody.rate.push({id: std.id, points: std.points})
+    });
+
+    this.appService.rateStudents(requestBody).subscribe({
       next: () => {
-        let requestBody: any = {rate: []};
-        this.allStudents.forEach((std: any) => {
-          requestBody.rate.push({id: std._id, points: std.points});
-        })
-        this.appService.rateStudents(requestBody).subscribe({
+        this.appService.deleteReport(this.reportID).subscribe({
           next: () => {
             this.router.navigate(['/reports']);
           },
-          error: (err) => {
-            console.error(err);
-          }
+          error: (err) => console.error(err)
         })
       },
       error: (err) => console.error(err)
@@ -292,7 +291,6 @@ export default class ModifyReportComponent {
   }
 
   deletePoints() {
-    console.log('Hola ya entré');
     this.allStudents.map((std: any) => {
       const achievePoints: number = std.achievements.reduce((acc: number, ach: string) => {
         return acc = acc - this.achievements.filter((achieve: any) => achieve.name === ach)[0]?.value;

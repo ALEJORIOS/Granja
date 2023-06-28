@@ -249,14 +249,21 @@ export default class RateStudentsComponent implements OnInit {
       this.achievements.map((ach: any) => {
         ach.students = this.allStudents.filter((std: any) => std.achievements.includes(ach.name));
       });
+      
       const requestBody: any = {
         date: this.formGroup.controls.date.value,
         service: this.formGroup.controls.service.value,
         teacher: this.formGroup.controls.teacher.value,
         achievements: this.achievements,
-        lastRecord: this.allStudents.map((student: any) => student.name + ' ' + student.lastName + ': ' + student.points)
+        lastRecord: this.allStudents.map((student: any) => {
+          return {
+            id: student._id,
+            name: student.name + ' ' + student.lastName, 
+            points: student.points
+          }
+        })
       }
-  
+
       this.appService.createReport(requestBody).subscribe({
         next: () => {
           this.rateStudents();
