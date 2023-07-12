@@ -30,7 +30,6 @@ export class AddAchievementComponent implements OnInit {
   ngOnInit(): void {
     this.getIcons();
     this.getAchievements();
-    console.log('>>>', this.data.image)
     if(this.edit) {
       this.form.controls.name.setValue(this.data.name);
       this.form.controls.value.setValue(this.data.value);
@@ -85,7 +84,6 @@ export class AddAchievementComponent implements OnInit {
       }
     })
 
-    console.log('>>>', this.achievements);
     this.appService.createAchievement({value: this.achievements}).subscribe({
       next: () => {
         this.modalService.dismissAll('refresh');

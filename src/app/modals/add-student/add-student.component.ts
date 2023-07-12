@@ -136,7 +136,6 @@ export class AddStudentComponent implements OnInit {
         membership: true,
         points: 0
       }
-      console.log('El body es: ', requestBody);
       this.appService.createStudent(requestBody).subscribe({
         next: () => {
           this.modalService.dismissAll('refresh');

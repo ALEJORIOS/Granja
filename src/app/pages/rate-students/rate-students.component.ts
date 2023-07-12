@@ -148,7 +148,6 @@ export default class RateStudentsComponent implements OnInit {
     if(this.loadedReport) {
       if(this.reports.filter((rpt: any) => rpt.date === this.formGroup.controls.date.value).length > 0) {
         if(this.reports.filter((rpt: any) => rpt.date === this.formGroup.controls.date.value).length === 1 && this.reports.filter((rpt: any) => rpt.date === this.formGroup.controls.date.value)[0].service === this.formGroup.controls.service.value) {
-          console.log('Entra mal aquí')
           if(this.reports.filter((rpt: any) => rpt.date === this.formGroup.controls.date.value)[0].achievements.some((ach: any) => {
             return ach.students.some((std: any) => std._id === id);
           })) {
@@ -273,6 +272,8 @@ export default class RateStudentsComponent implements OnInit {
           this.alert.type = "error";
           this.alert.msg = "Problema al subir Reporte";
           this.alert.show = true;
+          this.info.show = false;
+          this.enableSave = true;
         }
       })
     }
@@ -300,6 +301,8 @@ export default class RateStudentsComponent implements OnInit {
         this.alert.type = "error";
         this.alert.msg = "Problema al calificar Estudiantes";
         this.alert.show = true;
+        this.info.show = false;
+        this.enableSave = true;
       },
       complete: () => {
         this.info.show = false;
