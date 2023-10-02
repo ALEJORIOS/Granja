@@ -1,0 +1,51 @@
+.layout {
+    width: 100%;
+    min-height: 100%;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    margin-top: 1rem;
+    gap: 20px;
+    .top {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 8px;
+        .title {
+            display: flex;
+            flex-basis: 100%;
+            justify-content: center;
+            font-size: 2rem;
+            font-weight: 600;
+            margin-bottom: 24px;
+        }
+        .card {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 12px;
+            width: 200px;
+            height: 150px;
+            position: relative;
+            .name {
+                font-size: 24px;
+            }
+            .lastName {}
+            .points {
+                font-size: 24px;
+                font-weight: 600;
+            }
+        }
+        .silver {
+            background-color: #C0C0C0;
+        }
+        .gold {
+            background-color: #FFD700;
+            top: -20px;
+        }
+        .bronze {
+            background-color: #cd7f32;
+        }
+    }
+}
