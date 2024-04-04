@@ -1,5 +1,13 @@
 .layout {
     display: grid;
     min-height: 100vh;
-    grid-template-rows: auto 1fr auto;
+    grid-template-rows: auto 1fr auto auto;
+
+    .logo {
+        position: relative;
+        left: 1em;
+        height: 36px;
+        user-select: none;
+        -webkit-user-drag: none;
+    }
 }
