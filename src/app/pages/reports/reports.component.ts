@@ -22,6 +22,8 @@ export default class ReportsComponent implements OnInit {
   reports: any = [];
   allTeachers: any = [];
 
+  allDates: number[] = [];
+
   constructor(private appService: AppService, private router: Router) {}
 
   ngOnInit(): void {
@@ -32,7 +34,11 @@ export default class ReportsComponent implements OnInit {
   getReports() {
     this.appService.getReports().subscribe({
       next: (res) => {
-        this.reports = res;
+        this.reports = res.reverse();
+        this.allDates = this.reports.map((rep: any) => new Date(rep.date).getTime());
+        console.log('>> ', this.allDates);
+        console.log(new Date(Math.min(...this.allDates)));
+        console.log(new Date(Math.max(...this.allDates)));
       }
     })
   }

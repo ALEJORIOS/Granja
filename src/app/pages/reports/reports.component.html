@@ -1,17 +1,23 @@
 <div class="reports">
-    <div class="report-card" *ngFor="let report of reports" (click)="goToReport(report._id)">
-        <div class="info">
-            <span class="date">{{ report.date | date: "MMMM d" }}</span>
-            <div class="subtitle">
-                <span>{{ report.date | date: "YYYY" }}</span> - 
-                <span>{{ report.service | serviceTranslate }}</span>
-            </div>
-            <div class="attendance">
-                {{ getAttendance(report) }} Asistentes
-            </div>
-        </div>
-        <div class="teacher">
-            <span class="maestro">{{ translateTeacher(report.teacher)[0] }}</span>
-            <span class="teacherName">{{ translateTeacher(report.teacher)[1] }}</span></div>
+  <div
+    class="report-card"
+    *ngFor="let report of reports"
+    (click)="goToReport(report._id)"
+  >
+    <div class="info">
+      <span class="date">{{ report.date | date : "MMMM d" }}</span>
+      <div class="subtitle">
+        <span>{{ report.date | date : "YYYY" }}</span> -
+        <span>{{ report.service | serviceTranslate }}</span>
+      </div>
+      <div class="attendance">{{ getAttendance(report) }} Asistentes</div>
     </div>
+    <div class="teacher">
+      <span class="maestro">{{ translateTeacher(report.teacher)[0] }}</span>
+      <span class="teacherName">{{ translateTeacher(report.teacher)[1] }}</span>
+    </div>
+  </div>
+  <div class="missing">
+    
+  </div>
 </div>
