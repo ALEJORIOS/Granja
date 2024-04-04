@@ -23,6 +23,7 @@ export class AppComponent {
       }
       if(this.currentRoute === '/auth/login') {
         localStorage.removeItem('user');
+        localStorage.removeItem('hiddenDates');
       }
       appService.token.subscribe({
         next: (res) => {

@@ -6,6 +6,9 @@ import localeEs from '@angular/common/locales/es';
 import { registerLocaleData } from '@angular/common';
 import { ServiceTranslatePipe } from 'src/app/pipes/service-translate.pipe';
 import { Router } from '@angular/router';
+import * as dayjs from 'dayjs';
+import * as minMax from 'dayjs/plugin/minMax';
+dayjs.extend(minMax)
 
 registerLocaleData(localeEs, 'es');
 
@@ -15,16 +18,17 @@ registerLocaleData(localeEs, 'es');
   imports: [CommonModule, CommonModule, ServiceTranslatePipe],
   templateUrl: './reports.component.html',
   styleUrls: ['./reports.component.scss'],
-  providers: [{provide: LOCALE_ID, useValue: 'es'}]
+  providers: [{ provide: LOCALE_ID, useValue: 'es' }]
 })
 export default class ReportsComponent implements OnInit {
-  
+
   reports: any = [];
   allTeachers: any = [];
 
-  allDates: number[] = [];
+  allDates: dayjs.Dayjs[] = [];
+  missingDates: dayjs.Dayjs[] = [];
 
-  constructor(private appService: AppService, private router: Router) {}
+  constructor(private appService: AppService, private router: Router) { }
 
   ngOnInit(): void {
     this.getReports();
@@ -35,12 +39,31 @@ export default class ReportsComponent implements OnInit {
     this.appService.getReports().subscribe({
       next: (res) => {
         this.reports = res.reverse();
-        this.allDates = this.reports.map((rep: any) => new Date(rep.date).getTime());
-        console.log('>> ', this.allDates);
-        console.log(new Date(Math.min(...this.allDates)));
-        console.log(new Date(Math.max(...this.allDates)));
+        this.allDates = this.reports.map((rep: any) => dayjs(rep.date));
+        this.getMissingReports();
       }
     })
+  }
+
+  getMissingReports() {
+    const minDate = dayjs.min(this.allDates);
+    const maxDate = dayjs.max(this.allDates);
+    let iterDate = minDate.clone();
+    const churchDates = [];
+    while(!maxDate.isSame(iterDate)) {
+      if(iterDate.day() === 5 || iterDate.day() === 0) {
+        churchDates.push(iterDate.clone())
+      }
+      iterDate = iterDate.date(iterDate.date() + 1);
+    }
+    const numericDate: number[] = this.allDates.map((date: dayjs.Dayjs) => date.valueOf());
+    const notIntercept: dayjs.Dayjs[] = churchDates.filter((date: dayjs.Dayjs) => {
+      return !numericDate.includes(date.valueOf());
+    })
+    const alreadyHidden: string[] = JSON.parse(localStorage.getItem("hiddenDates") || "[]");
+    const formattedHidden = alreadyHidden.map((date: string) => dayjs(date)).map((date: dayjs.Dayjs) => date.valueOf());
+
+    this.missingDates = notIntercept.filter((date: dayjs.Dayjs) => !formattedHidden.includes(date.valueOf()));
   }
 
   getAttendance(report: any): number {
@@ -58,10 +81,17 @@ export default class ReportsComponent implements OnInit {
 
   translateTeacher(id: string) {
     const teacher = this.allTeachers.filter((teacher: any) => teacher._id === id)[0];
-    return [teacher?.gender === "Male" ? "Maestro" : "Maestra",`${teacher?.name || ""} ${teacher?.lastName || ""}`]
+    return [teacher?.gender === "Male" ? "Maestro" : "Maestra", `${teacher?.name || ""} ${teacher?.lastName || ""}`]
   }
 
   goToReport(id: string) {
-    this.router.navigate(['/modify-report'], {queryParams: {id}});
+    this.router.navigate(['/modify-report'], { queryParams: { id } });
+  }
+
+  hideDate(dateToHide: dayjs.Dayjs) {
+    this.missingDates = this.missingDates.filter((date: dayjs.Dayjs) => !date.isSame(dateToHide));
+    const hiddenDates = JSON.parse(localStorage.getItem("hiddenDates") || "[]");
+    hiddenDates.push(dateToHide);    
+    localStorage.setItem("hiddenDates", JSON.stringify(hiddenDates));
   }
 }

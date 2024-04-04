@@ -18,6 +18,9 @@
     </div>
   </div>
   <div class="missing">
-    
+    <h2>Reportes no realizados</h2>
+    <button *ngFor="let missingDate of missingDates" (click)="hideDate(missingDate)">
+      {{ missingDate.format('DD MMM YYYY') }}
+    </button>
   </div>
 </div>
